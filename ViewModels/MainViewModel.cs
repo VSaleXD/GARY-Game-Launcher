@@ -15,117 +15,85 @@ public class MainViewModel : INotifyPropertyChanged
     {
         new Game
         {
-            Title = "ECHOES OF AERIA",
-            Genre = "ADVENTURE",
-            Description = "Jelajahi dunia Aeria yang penuh misteri, puzzle, dan rahasia masa lalu."
-        },
-
-        new Game
-        {
-            Title = "NIGHT'S EDGE",
-            Genre = "ACTION",
-            Description = "Game action cepat dengan pertarungan intens dan gaya visual stylish."
-        },
-
-        new Game
-        {
-            Title = "FIELDS OF ORI",
-            Genre = "RPG",
-            Description = "RPG santai dengan cerita hangat tentang persahabatan dan petualangan."
-        },
-
-        new Game
-        {
-            Title = "BEYOND THE SIGNAL",
-            Genre = "PUZZLE",
-            Description = "Pecahkan teka-teki dan ungkap kebenaran di balik sinyal misterius."
-        },
-
-        new Game
-        {
-            Title = "VELOCITY DRIVE",
+            Title = "BRAKING BAD",
             Genre = "RACING",
-            Description = "Rasakan sensasi balapan futuristik dengan kecepatan tanpa batas."
+            Description = "Rasakan sensasi balapan dan tantangan kecepatan di lintasan yang penuh kejutan.",
+            ImagePath = "Assets/Images/game_braking_bad.png"
         },
 
         new Game
         {
-            Title = "KINGDOM RISE",
+            Title = "TIME DISORDER",
+            Genre = "ACTION",
+            Description = "Hadapi kekacauan waktu dan temukan jalan keluar dari dunia yang terus berubah.",
+            ImagePath = "Assets/Images/game_time_disorder.png"
+        },
+
+        new Game
+        {
+            Title = "BALLDREAM",
+            Genre = "SPORT",
+            Description = "Buktikan kemampuanmu dan raih kemenangan dalam petualangan sepak bola.",
+            ImagePath = "Assets/Images/game_balldream.png"
+        },
+
+        new Game
+        {
+            Title = "DISTRACT",
+            Genre = "ADVENTURE",
+            Description = "Hadapi berbagai gangguan dan temukan cara untuk mencapai tujuanmu.",
+            ImagePath = "Assets/Images/game_distract.png"
+        },
+
+        new Game
+        {
+            Title = "INSECTROPY",
+            Genre = "ADVENTURE",
+            Description = "Masuki dunia serangga yang penuh misteri dan tantangan.",
+            ImagePath = "Assets/Images/game_insectropy.png"
+        },
+
+        new Game
+        {
+            Title = "CODE DEFENDER",
             Genre = "STRATEGY",
-            Description = "Bangun kerajaanmu, atur strategi, dan taklukkan wilayah lain."
+            Description = "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.",
+            ImagePath = "Assets/Images/game_code_defender.png"
         },
 
         new Game
         {
-            Title = "WHISPERING HALLS",
-            Genre = "HORROR",
-            Description = "Jelajahi lorong gelap dan hadapi kengerian yang mengintai di balik bayangan."
-        },
-
-        new Game
-        {
-            Title = "COZY HAVEN",
+            Title = "DINE",
             Genre = "SIMULATION",
-            Description = "Bangun tempat impianmu dan nikmati hidup yang damai setiap hari."
+            Description = "Kelola restoranmu dan layani pelanggan dalam pengalaman memasak yang unik.",
+            ImagePath = "Assets/Images/game_dine.png"
+        },
+
+        new Game
+        {
+            Title = "ARCHEMISTS CHRONICLES",
+            Genre = "RPG",
+            Description = "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.",
+            ImagePath = "Assets/Images/game_archemists_chronicles.png"
         },
 
         // PAGE 2
 
         new Game
         {
-            Title = "STARFALL",
-            Genre = "ADVENTURE",
-            Description = "Temukan rahasia dunia yang berada di bawah cahaya bintang terakhir."
-        },
-
-        new Game
-        {
-            Title = "NEON RUNNER",
+            Title = "UPRISING",
             Genre = "ACTION",
-            Description = "Berpacu melawan waktu di kota futuristik yang penuh bahaya."
+            Description = "Bangkit melawan kekuatan yang menguasai dunia dan tentukan masa depanmu.",
+            ImagePath = "Assets/Images/game_uprising.png"
         },
 
         new Game
         {
-            Title = "FOREST TALES",
-            Genre = "RPG",
-            Description = "Petualangan kecil penuh cerita di tengah hutan yang misterius."
-        },
-
-        new Game
-        {
-            Title = "LOST FREQUENCY",
-            Genre = "PUZZLE",
-            Description = "Cari sumber sinyal aneh dan pecahkan misteri yang tersembunyi."
-        },
-
-        new Game
-        {
-            Title = "TURBO CIRCUIT",
-            Genre = "RACING",
-            Description = "Taklukkan lintasan berbahaya dengan kendaraan berkecepatan tinggi."
-        },
-
-        new Game
-        {
-            Title = "EMPIRE'S DAWN",
-            Genre = "STRATEGY",
-            Description = "Bangun peradabanmu dan kuasai dunia melalui strategi."
-        },
-
-        new Game
-        {
-            Title = "THE ABANDONED",
+            Title = "PUAKA",
             Genre = "HORROR",
-            Description = "Masuki tempat yang telah lama ditinggalkan dan temukan apa yang terjadi."
+            Description = "Hadapi kengerian dan misteri yang tersembunyi di balik dunia yang gelap.",
+            ImagePath = "Assets/Images/game_puaka.png"
         },
-
-        new Game
-        {
-            Title = "LITTLE CAFE",
-            Genre = "SIMULATION",
-            Description = "Kelola kafe kecilmu dan ciptakan tempat yang nyaman bagi semua orang."
-        }
     };
 
     public ObservableCollection<Game> CurrentPageGames { get; } = new();

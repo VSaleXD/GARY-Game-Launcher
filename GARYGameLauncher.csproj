@@ -7,5 +7,12 @@
     <ImplicitUsings>enable</ImplicitUsings>
     <UseWPF>true</UseWPF>
   </PropertyGroup>
+  <ItemGroup>
+  <Resource Include="Assets\Images\*.png" />
+    <Resource Include="Assets\Fonts\Oxanium-Regular.ttf" />
+    <Resource Include="Assets\Fonts\Rajdhani-Regular.ttf" />
+    <Resource Include="Assets\Fonts\Rajdhani-Bold.ttf" />
+    <Resource Include="Assets\Fonts\NotoSans-Regular.ttf" />
+  </ItemGroup>
 
 </Project>

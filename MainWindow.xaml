@@ -18,6 +18,20 @@
 
     <Window.Resources>
 
+        <!-- ================= FONTS ================= -->
+
+        <FontFamily x:Key="OxaniumFont">
+            ./Assets/Fonts/#Oxanium
+        </FontFamily>
+
+        <FontFamily x:Key="RajdhaniFont">
+            ./Assets/Fonts/#Rajdhani
+        </FontFamily>
+
+        <FontFamily x:Key="NotoSansFont">
+            ./Assets/Fonts/#Noto Sans
+        </FontFamily>
+
         <!-- ================= COLORS ================= -->
 
         <SolidColorBrush x:Key="BackgroundBrush"
@@ -27,10 +41,10 @@
                          Color="#050B08"/>
 
         <SolidColorBrush x:Key="PrimaryGreenBrush"
-                         Color="#9AFF00"/>
+                         Color="#CCED00"/>
 
         <SolidColorBrush x:Key="DarkGreenBrush"
-                         Color="#285000"/>
+                         Color="#3A4700"/>
 
         <SolidColorBrush x:Key="TextPrimaryBrush"
                          Color="#FFFFFF"/>
@@ -85,7 +99,7 @@
 
                                 <Setter TargetName="ButtonBorder"
                                         Property="Background"
-                                        Value="#B5FF4A"/>
+                                        Value="#3A4700"/>
 
                             </Trigger>
 
@@ -94,7 +108,7 @@
 
                                 <Setter TargetName="ButtonBorder"
                                         Property="Background"
-                                        Value="#6FBC00"/>
+                                        Value="#AFC900"/>
 
                             </Trigger>
 
@@ -148,12 +162,16 @@
                                 Background="{TemplateBinding Background}"
                                 BorderBrush="{TemplateBinding BorderBrush}"
                                 BorderThickness="{TemplateBinding BorderThickness}"
-                                CornerRadius="8">
+                                CornerRadius="12">
 
                             <ContentPresenter
                                 HorizontalAlignment="Center"
                                 VerticalAlignment="Center"
-                                Margin="0,-3,0,0"/>
+                                Margin="0">
+                                <ContentPresenter.RenderTransform>
+                                    <TranslateTransform Y="-4"/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
 
                         </Border>
 
@@ -214,11 +232,11 @@
 
             <Grid.RowDefinitions>
 
-                <RowDefinition Height="155"/>
+                <RowDefinition Height="175"/>
 
                 <RowDefinition Height="*"/>
 
-                <RowDefinition Height="70"/>
+                <RowDefinition Height="65"/>
 
             </Grid.RowDefinitions>
 
@@ -231,20 +249,14 @@
                         HorizontalAlignment="Center">
 
 
-                <!-- TEMPORARY LOGO -->
+                <!-- LOGO -->
 
-                <TextBlock Text="GARY"
-                           Foreground="{StaticResource PrimaryGreenBrush}"
-                           FontSize="30"
-                           FontWeight="Bold"
-                           HorizontalAlignment="Center"/>
-
-                <TextBlock Text="GAME DEVELOPMENT COMMUNITY IPB"
-                           Foreground="#FFFFFF"
-                           FontSize="8"
-                           FontWeight="SemiBold"
-                           HorizontalAlignment="Center"
-                           Margin="0,0,0,12"/>
+                <Image Source="Assets/Images/gary_logo.png"
+                       Width="150"
+                       Height="55"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
 
 
                 <!-- TITLE -->
@@ -253,11 +265,13 @@
                             HorizontalAlignment="Center">
 
                     <TextBlock Text="GARY"
+                               FontFamily="{StaticResource OxaniumFont}"
                                Foreground="#F5F5F5"
                                FontSize="62"
                                FontWeight="Bold"/>
 
                     <TextBlock Text=" GAME HUB"
+                               FontFamily="{StaticResource OxaniumFont}"
                                Foreground="{StaticResource PrimaryGreenBrush}"
                                FontSize="62"
                                FontWeight="Bold"/>
@@ -267,11 +281,13 @@
 
                 <!-- SUBTITLE -->
 
-                <TextBlock Text="Discover  •  Play  •  Support Local Game Developers"
+                <TextBlock Text="Learn  •  Develop  •  Fun"
+                           FontFamily="{StaticResource NotoSansFont}"
                            Foreground="#EEEEEE"
-                           FontSize="18"
+                           FontSize="22"
+                           FontWeight="Bold"
                            HorizontalAlignment="Center"
-                           Margin="0,2,0,0"/>
+                           Margin="0,-4,0,0"/>
 
             </StackPanel>
 
@@ -281,7 +297,7 @@
             <!-- ================================================= -->
 
             <Grid Grid.Row="1"
-                  Margin="0,5,0,5">
+                  Margin="8,4,8,4">
 
                 <ItemsControl ItemsSource="{Binding CurrentPageGames}">
 
@@ -302,18 +318,17 @@
                         <DataTemplate>
 
                             <Border Margin="7"
-                                    CornerRadius="13"
+                                    CornerRadius="12"
                                     Background="{StaticResource CardBrush}"
-                                    BorderBrush="#7FBF00"
+                                    BorderBrush="#CCED00"
                                     BorderThickness="1.5"
                                     ClipToBounds="True">
-
 
                                 <Grid>
 
                                     <Grid.RowDefinitions>
 
-                                        <RowDefinition Height="180"/>
+                                        <RowDefinition Height="220"/>
 
                                         <RowDefinition Height="*"/>
 
@@ -325,21 +340,35 @@
                                     <!-- ================================= -->
 
                                     <Border Grid.Row="0"
-                                            Background="#09130D">
+                                            CornerRadius="12,12,0,0"
+                                            ClipToBounds="True">
+
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding ImagePath}"
+                                                        Stretch="Fill"/>
+                                        </Border.Background>
 
                                         <Grid>
 
-                                            <TextBlock Text="GAME IMAGE"
-                                                       Foreground="#263429"
-                                                       FontSize="15"
-                                                       FontWeight="Bold"
-                                                       HorizontalAlignment="Center"
-                                                       VerticalAlignment="Center"/>
-
-                                            <!-- DARK OVERLAY -->
-
                                             <Rectangle Fill="#000000"
-                                                       Opacity="0.20"/>
+                                                    Opacity="0.18"/>
+
+                                            <!-- GENRE -->
+
+                                            <Border HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Background="#CCED0088"
+                                                    CornerRadius="7"
+                                                    Padding="10,4"
+                                                    Margin="12">
+
+                                                <TextBlock Text="{Binding Genre}"
+                                                        Foreground="#FFFFFF"
+                                                        FontFamily="{StaticResource RajdhaniFont}"
+                                                        FontWeight="Bold"
+                                                        FontSize="11"/>
+
+                                            </Border>
 
                                         </Grid>
 
@@ -351,64 +380,53 @@
                                     <!-- ================================= -->
 
                                     <Grid Grid.Row="1"
-                                          Margin="16,10,16,10">
+                                          Margin="16,8,16,9">
 
                                         <Grid.RowDefinitions>
 
                                             <RowDefinition Height="Auto"/>
 
-                                            <RowDefinition Height="Auto"/>
-
                                             <RowDefinition Height="*"/>
 
-                                            <RowDefinition Height="39"/>
+                                            <RowDefinition Height="37"/>
 
                                         </Grid.RowDefinitions>
 
 
-                                        <!-- GENRE -->
-
-                                        <Border Grid.Row="0"
-                                                HorizontalAlignment="Left"
-                                                Background="{StaticResource DarkGreenBrush}"
-                                                CornerRadius="10"
-                                                Padding="10,3">
-
-                                            <TextBlock Text="{Binding Genre}"
-                                                       Foreground="{StaticResource PrimaryGreenBrush}"
-                                                       FontSize="10"
-                                                       FontWeight="Bold"/>
-
-                                        </Border>
-
-
                                         <!-- TITLE -->
 
-                                        <TextBlock Grid.Row="1"
+                                        <TextBlock Grid.Row="0"
                                                    Text="{Binding Title}"
                                                    Foreground="{StaticResource TextPrimaryBrush}"
-                                                   FontSize="20"
+                                                   FontFamily="{StaticResource OxaniumFont}"
+                                                   FontSize="19"
                                                    FontWeight="Bold"
-                                                   Margin="0,6,0,3"
+                                                   Margin="0,0,0,4"
                                                    TextTrimming="CharacterEllipsis"/>
 
 
                                         <!-- DESCRIPTION -->
 
-                                        <TextBlock Grid.Row="2"
+                                        <TextBlock Grid.Row="1"
                                                    Text="{Binding Description}"
                                                    Foreground="{StaticResource TextSecondaryBrush}"
-                                                   FontSize="12"
-                                                   LineHeight="17"
+                                                   FontFamily="{StaticResource NotoSansFont}"
+                                                   FontSize="14"
+                                                   LineHeight="20"
                                                    TextWrapping="Wrap"
                                                    VerticalAlignment="Top"/>
 
 
                                         <!-- PLAY -->
 
-                                        <Button Grid.Row="3"
+                                        <Button Grid.Row="2"
                                                 Style="{StaticResource PlayButtonStyle}"
-                                                Content="▶   PLAY GAME"/>
+                                                Content="▶   PLAY GAME"
+                                                RenderTransformOrigin="0.5,0.5">
+                                            <Button.RenderTransform>
+                                                <TranslateTransform Y="-6"/>
+                                            </Button.RenderTransform>
+                                        </Button>
 
                                     </Grid>
 
@@ -464,15 +482,65 @@
 
                         <Ellipse Width="11"
                                  Height="11"
-                                 Fill="{StaticResource PrimaryGreenBrush}"
-                                 Margin="4"/>
+                                 Margin="4">
+
+                            <Ellipse.Style>
+
+                                <Style TargetType="Ellipse">
+
+                                    <Setter Property="Fill"
+                                            Value="#555555"/>
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding CurrentPage}"
+                                                     Value="0">
+
+                                            <Setter Property="Fill"
+                                                    Value="#CCED00"/>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </Ellipse.Style>
+
+                        </Ellipse>
+
 
                         <Ellipse Width="11"
                                  Height="11"
-                                 Fill="#555555"
-                                 Margin="4"/>
+                                 Margin="4">
+
+                            <Ellipse.Style>
+
+                                <Style TargetType="Ellipse">
+
+                                    <Setter Property="Fill"
+                                            Value="#555555"/>
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding CurrentPage}"
+                                                     Value="1">
+
+                                            <Setter Property="Fill"
+                                                    Value="#CCED00"/>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </Ellipse.Style>
+
+                        </Ellipse>
 
                     </StackPanel>
+
 
                     <TextBlock Text="Scroll untuk melihat lebih banyak game"
                                Foreground="#D0D0D0"
