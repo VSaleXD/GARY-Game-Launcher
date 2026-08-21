@@ -1,4 +1,7 @@
-﻿using System.Windows;
+﻿using System;
+using System.Collections.Generic;
+using System.Windows;
+using System.Windows.Media;
 using GARYGameLauncher.ViewModels;
 
 namespace GARYGameLauncher;
@@ -8,22 +11,114 @@ public partial class MainWindow : Window
     private MainViewModel ViewModel =>
         (MainViewModel)DataContext;
 
+    // Menyimpan semua MediaPlayer yang sedang bermain.
+    // Jadi SFX baru tidak memotong SFX sebelumnya.
+    private readonly List<MediaPlayer> _activeSounds = new();
+
     public MainWindow()
     {
         InitializeComponent();
     }
 
-    private void NextButton_Click(object sender, RoutedEventArgs e)
+    // =========================
+    // SFX SYSTEM
+    // =========================
+
+    private void PlaySound(string filePath)
     {
+        try
+        {
+            var player = new MediaPlayer();
+
+            player.Open(new Uri(
+                System.IO.Path.GetFullPath(filePath),
+                UriKind.Absolute));
+
+            _activeSounds.Add(player);
+
+            player.MediaEnded += (sender, e) =>
+            {
+                if (sender is MediaPlayer finishedPlayer)
+                {
+                    finishedPlayer.Stop();
+                    finishedPlayer.Close();
+
+                    _activeSounds.Remove(finishedPlayer);
+                }
+            };
+
+            player.MediaFailed += (sender, e) =>
+            {
+                if (sender is MediaPlayer failedPlayer)
+                {
+                    failedPlayer.Close();
+                    _activeSounds.Remove(failedPlayer);
+                }
+            };
+
+            player.Play();
+        }
+        catch
+        {
+            // SFX tidak boleh membuat launcher crash.
+        }
+    }
+
+    // =========================
+    // CARD HOVER
+    // =========================
+
+    private void GameCard_MouseEnter(
+        object sender,
+        System.Windows.Input.MouseEventArgs e)
+    {
+        PlaySound("Assets/Audio/hover_card.wav");
+    }
+
+    // =========================
+    // PLAY BUTTON
+    // =========================
+
+    private void PlayButton_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        PlaySound("Assets/Audio/click_play.wav");
+    }
+
+    // =========================
+    // NEXT PAGE
+    // =========================
+
+    private void NextButton_Click(
+        object sender,
+        RoutedEventArgs e)
+    {
+        PlaySound("Assets/Audio/click_navigation.wav");
+
         ViewModel.NextPage();
     }
 
-    private void PreviousButton_Click(object sender, RoutedEventArgs e)
+    // =========================
+    // PREVIOUS PAGE
+    // =========================
+
+    private void PreviousButton_Click(
+        object sender,
+        RoutedEventArgs e)
     {
+        PlaySound("Assets/Audio/click_navigation.wav");
+
         ViewModel.PreviousPage();
     }
 
-    private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    // =========================
+    // ESCAPE
+    // =========================
+
+    private void Window_KeyDown(
+        object sender,
+        System.Windows.Input.KeyEventArgs e)
     {
         if (e.Key == System.Windows.Input.Key.Escape)
         {

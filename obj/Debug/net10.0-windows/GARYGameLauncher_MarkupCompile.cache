@@ -1,5 +1,5 @@
 ﻿GARYGameLauncher
-1.0.0.0
+
 
 winexe
 C#
@@ -12,9 +12,9 @@ TRACE;DEBUG;NET;NET10_0;NETCOREAPP;WINDOWS;WINDOWS7_0;NET5_0_OR_GREATER;NET6_0_O
 C:\Users\Darith\Documents\Documents\My Projects\GARY Game Launcher\GARYGameLauncher\App.xaml
 2-1185207531
 
-9788237803
+7830419879
 206702017258
 controls\CometBackground.xaml;MainWindow.xaml;
 
-True
+False
 
