@@ -4,6 +4,7 @@
         xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
         xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
         xmlns:vm="clr-namespace:GARYGameLauncher.ViewModels"
+        xmlns:controls="clr-namespace:GARYGameLauncher.Controls"
         mc:Ignorable="d"
         Title="GARY Game Hub"
         WindowStyle="None"
@@ -229,6 +230,7 @@
     <!-- ========================================================= -->
 
     <Grid Background="{StaticResource BackgroundBrush}">
+        <controls:CometBackground />
 
 
         <!-- ================= DECORATION ================= -->
