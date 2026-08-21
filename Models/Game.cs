@@ -6,6 +6,8 @@ public class Game
 
     public string Genre { get; set; } = string.Empty;
 
+    public string GenreColor { get; set; } = "#CCED00";
+
     public string Description { get; set; } = string.Empty;
 
     public string ImagePath { get; set; } = string.Empty;

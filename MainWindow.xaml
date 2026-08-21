@@ -18,19 +18,44 @@
 
     <Window.Resources>
 
-        <!-- ================= FONTS ================= -->
+        <!-- ================= INTERACTIVE BORDERS ================= -->
 
-        <FontFamily x:Key="OxaniumFont">
-            ./Assets/Fonts/#Oxanium
-        </FontFamily>
+        <Style x:Key="GameCardStyle"
+            TargetType="Border">
 
-        <FontFamily x:Key="RajdhaniFont">
-            ./Assets/Fonts/#Rajdhani
-        </FontFamily>
+            <Setter Property="BorderBrush"
+                    Value="#718000"/>
 
-        <FontFamily x:Key="NotoSansFont">
-            ./Assets/Fonts/#Noto Sans
-        </FontFamily>
+            <Setter Property="BorderThickness"
+                    Value="1.5"/>
+
+            <Style.Triggers>
+
+                <Trigger Property="IsMouseOver"
+                        Value="True">
+
+                    <Setter Property="BorderBrush"
+                            Value="#CCED00"/>
+
+                </Trigger>
+
+            </Style.Triggers>
+
+        </Style>
+
+                <!-- ================= FONTS ================= -->
+
+                <FontFamily x:Key="OxaniumFont">
+                    ./Assets/Fonts/#Oxanium
+                </FontFamily>
+
+                <FontFamily x:Key="RajdhaniFont">
+                    ./Assets/Fonts/#Rajdhani
+                </FontFamily>
+
+                <FontFamily x:Key="NotoSansFont">
+                    ./Assets/Fonts/#Noto Sans
+                </FontFamily>
 
         <!-- ================= COLORS ================= -->
 
@@ -99,7 +124,7 @@
 
                                 <Setter TargetName="ButtonBorder"
                                         Property="Background"
-                                        Value="#3A4700"/>
+                                        Value="#AFC900"/>
 
                             </Trigger>
 
@@ -108,7 +133,7 @@
 
                                 <Setter TargetName="ButtonBorder"
                                         Property="Background"
-                                        Value="#AFC900"/>
+                                        Value="#9BB300"/>
 
                             </Trigger>
 
@@ -318,11 +343,10 @@
                         <DataTemplate>
 
                             <Border Margin="7"
-                                    CornerRadius="12"
-                                    Background="{StaticResource CardBrush}"
-                                    BorderBrush="#CCED00"
-                                    BorderThickness="1.5"
-                                    ClipToBounds="True">
+                                CornerRadius="12"
+                                Background="{StaticResource CardBrush}"
+                                Style="{StaticResource GameCardStyle}"
+                                ClipToBounds="True">
 
                                 <Grid>
 
@@ -356,11 +380,12 @@
                                             <!-- GENRE -->
 
                                             <Border HorizontalAlignment="Left"
-                                                    VerticalAlignment="Top"
-                                                    Background="#CCED0088"
-                                                    CornerRadius="7"
-                                                    Padding="10,4"
-                                                    Margin="12">
+                                                VerticalAlignment="Top"
+                                                Background="{Binding GenreColor}"
+                                                CornerRadius="7"
+                                                Padding="10,4"
+                                                Margin="12"
+                                                Opacity="0.88">
 
                                                 <TextBlock Text="{Binding Genre}"
                                                         Foreground="#FFFFFF"
@@ -542,7 +567,7 @@
                     </StackPanel>
 
 
-                    <TextBlock Text="Scroll untuk melihat lebih banyak game"
+                    <TextBlock Text="Geser untuk melihat lebih banyak game"
                                Foreground="#D0D0D0"
                                FontSize="12"
                                HorizontalAlignment="Center"/>

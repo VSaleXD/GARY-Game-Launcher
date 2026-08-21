@@ -16,56 +16,63 @@ public class MainViewModel : INotifyPropertyChanged
         new Game
         {
             Title = "BRAKING BAD",
-            Genre = "RACING",
-            Description = "Rasakan sensasi balapan dan tantangan kecepatan di lintasan yang penuh kejutan.",
+            Genre = "LOCAL MULTIPLAYER RACING",
+            GenreColor = "#FF5C5C",
+            Description = "Bertanding dalam berbagai minigame kacau menggunakan mobil bersama teman.",
             ImagePath = "Assets/Images/game_braking_bad.png"
         },
 
         new Game
         {
             Title = "TIME DISORDER",
-            Genre = "ACTION",
-            Description = "Hadapi kekacauan waktu dan temukan jalan keluar dari dunia yang terus berubah.",
+            Genre = "ACTION RUNNER",
+            GenreColor = "#FF9F43",
+            Description = "Gunakan manipulasi waktu dan dash untuk memburu musuh di kota futuristik.",
             ImagePath = "Assets/Images/game_time_disorder.png"
         },
 
         new Game
         {
             Title = "BALLDREAM",
-            Genre = "SPORT",
-            Description = "Buktikan kemampuanmu dan raih kemenangan dalam petualangan sepak bola.",
+            Genre = "3D PLATFORMER",
+            GenreColor = "#4D96FF",
+            Description = "Kendalikan bola melewati dunia mimpi penuh rintangan untuk menemukan jalan keluar.",
             ImagePath = "Assets/Images/game_balldream.png"
         },
 
         new Game
         {
             Title = "DISTRACT",
-            Genre = "ADVENTURE",
-            Description = "Hadapi berbagai gangguan dan temukan cara untuk mencapai tujuanmu.",
+            Genre = "TOWER DEFENSE",
+            GenreColor = "#A66CFF",
+            Description = "Gunakan alat produktivitas untuk menghentikan berbagai distraksi yang menyerang.",
             ImagePath = "Assets/Images/game_distract.png"
         },
 
         new Game
         {
             Title = "INSECTROPY",
-            Genre = "ADVENTURE",
-            Description = "Masuki dunia serangga yang penuh misteri dan tantangan.",
+            Genre = "TACTICAL ROGUELIKE",
+            GenreColor = "#6B4526",
+            Description = "Dua semut bertarung secara taktis menggunakan dadu dan artefak untuk mengalahkan tujuh dosa mematikan.",
             ImagePath = "Assets/Images/game_insectropy.png"
         },
 
         new Game
         {
             Title = "CODE DEFENDER",
-            Genre = "STRATEGY",
-            Description = "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.",
+            Genre = "SHOOTER ACTION",
+            GenreColor = "#00C9A7",
+            Description = "Menjadi sistem pertahanan kode untuk melawan virus yang merusak program.",
             ImagePath = "Assets/Images/game_code_defender.png"
         },
 
         new Game
         {
             Title = "DINE",
-            Genre = "SIMULATION",
-            Description = "Kelola restoranmu dan layani pelanggan dalam pengalaman memasak yang unik.",
+            Genre = "HORROR",
+            GenreColor = "#7A1F1F",
+            Description = "Bermain sebagai skinwalker yang harus menyamar dan bertahan hidup dari para pemburu hingga pagi.",
             ImagePath = "Assets/Images/game_dine.png"
         },
 
@@ -73,6 +80,7 @@ public class MainViewModel : INotifyPropertyChanged
         {
             Title = "ARCHEMISTS CHRONICLES",
             Genre = "RPG",
+            GenreColor = "#285C35",
             Description = "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.",
             ImagePath = "Assets/Images/game_archemists_chronicles.png"
         },
@@ -82,16 +90,18 @@ public class MainViewModel : INotifyPropertyChanged
         new Game
         {
             Title = "UPRISING",
-            Genre = "ACTION",
-            Description = "Bangkit melawan kekuatan yang menguasai dunia dan tentukan masa depanmu.",
+            Genre = "PLATFORMER",
+            GenreColor = "#4D96FF",
+            Description = "Tahanan menggunakan bola besi yang terikat di kakinya untuk melontarkan diri menuju permukaan.",
             ImagePath = "Assets/Images/game_uprising.png"
         },
 
         new Game
         {
             Title = "PUAKA",
-            Genre = "HORROR",
-            Description = "Hadapi kengerian dan misteri yang tersembunyi di balik dunia yang gelap.",
+            Genre = "PLATFORMER SHOOTER",
+            GenreColor = "#FF7043",
+            Description = "Skeleton dan roh api menyerbu kastil misterius dalam platformer shooter bergaya retro.",
             ImagePath = "Assets/Images/game_puaka.png"
         },
     };
