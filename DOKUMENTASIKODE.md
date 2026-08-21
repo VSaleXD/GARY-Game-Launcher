@@ -1,0 +1,798 @@
+# MainWindow.xaml
+<Window x:Class="GARYGameLauncher.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006"
+        xmlns:d="http://schemas.microsoft.com/expression/blend/2008"
+        xmlns:vm="clr-namespace:GARYGameLauncher.ViewModels"
+        mc:Ignorable="d"
+        Title="GARY Game Hub"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        WindowState="Maximized"
+        Background="#020504"
+        KeyDown="Window_KeyDown">
+
+    <Window.DataContext>
+        <vm:MainViewModel/>
+    </Window.DataContext>
+
+    <Window.Resources>
+
+        <!-- ================= FONTS ================= -->
+
+        <FontFamily x:Key="OxaniumFont">
+            ./Assets/Fonts/#Oxanium
+        </FontFamily>
+
+        <FontFamily x:Key="RajdhaniFont">
+            ./Assets/Fonts/#Rajdhani
+        </FontFamily>
+
+        <FontFamily x:Key="NotoSansFont">
+            ./Assets/Fonts/#Noto Sans
+        </FontFamily>
+
+        <!-- ================= COLORS ================= -->
+
+        <SolidColorBrush x:Key="BackgroundBrush"
+                         Color="#020504"/>
+
+        <SolidColorBrush x:Key="CardBrush"
+                         Color="#050B08"/>
+
+        <SolidColorBrush x:Key="PrimaryGreenBrush"
+                         Color="#CCED00"/>
+
+        <SolidColorBrush x:Key="DarkGreenBrush"
+                         Color="#3A4700"/>
+
+        <SolidColorBrush x:Key="TextPrimaryBrush"
+                         Color="#FFFFFF"/>
+
+        <SolidColorBrush x:Key="TextSecondaryBrush"
+                         Color="#D2D2D2"/>
+
+
+        <!-- ================= BUTTON ================= -->
+
+        <Style x:Key="PlayButtonStyle"
+               TargetType="Button">
+
+            <Setter Property="Background"
+                    Value="{StaticResource PrimaryGreenBrush}"/>
+
+            <Setter Property="Foreground"
+                    Value="#050805"/>
+
+            <Setter Property="BorderThickness"
+                    Value="0"/>
+
+            <Setter Property="FontSize"
+                    Value="15"/>
+
+            <Setter Property="FontWeight"
+                    Value="Bold"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="ButtonBorder"
+                                Background="{TemplateBinding Background}"
+                                CornerRadius="8">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"/>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter TargetName="ButtonBorder"
+                                        Property="Background"
+                                        Value="#3A4700"/>
+
+                            </Trigger>
+
+                            <Trigger Property="IsPressed"
+                                     Value="True">
+
+                                <Setter TargetName="ButtonBorder"
+                                        Property="Background"
+                                        Value="#AFC900"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+
+        <!-- ================= NAVIGATION BUTTON ================= -->
+
+        <Style x:Key="NavigationButtonStyle"
+               TargetType="Button">
+
+            <Setter Property="Width"
+                    Value="42"/>
+
+            <Setter Property="Height"
+                    Value="42"/>
+
+            <Setter Property="Background"
+                    Value="Transparent"/>
+
+            <Setter Property="Foreground"
+                    Value="{StaticResource PrimaryGreenBrush}"/>
+
+            <Setter Property="BorderBrush"
+                    Value="{StaticResource PrimaryGreenBrush}"/>
+
+            <Setter Property="BorderThickness"
+                    Value="2"/>
+
+            <Setter Property="FontSize"
+                    Value="28"/>
+
+            <Setter Property="Cursor"
+                    Value="Hand"/>
+
+            <Setter Property="Template">
+
+                <Setter.Value>
+
+                    <ControlTemplate TargetType="Button">
+
+                        <Border x:Name="NavBorder"
+                                Background="{TemplateBinding Background}"
+                                BorderBrush="{TemplateBinding BorderBrush}"
+                                BorderThickness="{TemplateBinding BorderThickness}"
+                                CornerRadius="12">
+
+                            <ContentPresenter
+                                HorizontalAlignment="Center"
+                                VerticalAlignment="Center"
+                                Margin="0">
+                                <ContentPresenter.RenderTransform>
+                                    <TranslateTransform Y="-4"/>
+                                </ContentPresenter.RenderTransform>
+                            </ContentPresenter>
+
+                        </Border>
+
+                        <ControlTemplate.Triggers>
+
+                            <Trigger Property="IsMouseOver"
+                                     Value="True">
+
+                                <Setter TargetName="NavBorder"
+                                        Property="Background"
+                                        Value="#163000"/>
+
+                            </Trigger>
+
+                        </ControlTemplate.Triggers>
+
+                    </ControlTemplate>
+
+                </Setter.Value>
+
+            </Setter>
+
+        </Style>
+
+    </Window.Resources>
+
+
+    <!-- ========================================================= -->
+    <!-- ROOT -->
+    <!-- ========================================================= -->
+
+    <Grid Background="{StaticResource BackgroundBrush}">
+
+
+        <!-- ================= DECORATION ================= -->
+
+        <Canvas IsHitTestVisible="False"
+                Opacity="0.35">
+
+            <Polygon Points="0,0 180,0 0,110"
+                     Fill="#071608"/>
+
+            <Polygon Points="1916,0 1740,0 1916,100"
+                     Fill="#071608"/>
+
+            <Polygon Points="0,1079 0,960 170,1079"
+                     Fill="#071608"/>
+
+            <Polygon Points="1916,1079 1740,1079 1916,960"
+                     Fill="#071608"/>
+
+        </Canvas>
+
+
+        <!-- ================= MAIN CONTENT ================= -->
+
+        <Grid Margin="65,20,65,20">
+
+            <Grid.RowDefinitions>
+
+                <RowDefinition Height="175"/>
+
+                <RowDefinition Height="*"/>
+
+                <RowDefinition Height="65"/>
+
+            </Grid.RowDefinitions>
+
+
+            <!-- ================================================= -->
+            <!-- HEADER -->
+            <!-- ================================================= -->
+
+            <StackPanel Grid.Row="0"
+                        HorizontalAlignment="Center">
+
+
+                <!-- LOGO -->
+
+                <Image Source="Assets/Images/gary_logo.png"
+                       Width="150"
+                       Height="55"
+                       Stretch="Uniform"
+                       HorizontalAlignment="Center"
+                       Margin="0,0,0,10"/>
+
+
+                <!-- TITLE -->
+
+                <StackPanel Orientation="Horizontal"
+                            HorizontalAlignment="Center">
+
+                    <TextBlock Text="GARY"
+                               FontFamily="{StaticResource OxaniumFont}"
+                               Foreground="#F5F5F5"
+                               FontSize="62"
+                               FontWeight="Bold"/>
+
+                    <TextBlock Text=" GAME HUB"
+                               FontFamily="{StaticResource OxaniumFont}"
+                               Foreground="{StaticResource PrimaryGreenBrush}"
+                               FontSize="62"
+                               FontWeight="Bold"/>
+
+                </StackPanel>
+
+
+                <!-- SUBTITLE -->
+
+                <TextBlock Text="Learn  •  Develop  •  Fun"
+                           FontFamily="{StaticResource NotoSansFont}"
+                           Foreground="#EEEEEE"
+                           FontSize="22"
+                           FontWeight="Bold"
+                           HorizontalAlignment="Center"
+                           Margin="0,-4,0,0"/>
+
+            </StackPanel>
+
+
+            <!-- ================================================= -->
+            <!-- GAME GRID -->
+            <!-- ================================================= -->
+
+            <Grid Grid.Row="1"
+                  Margin="8,4,8,4">
+
+                <ItemsControl ItemsSource="{Binding CurrentPageGames}">
+
+                    <ItemsControl.ItemsPanel>
+
+                        <ItemsPanelTemplate>
+
+                            <UniformGrid Rows="2"
+                                         Columns="4"/>
+
+                        </ItemsPanelTemplate>
+
+                    </ItemsControl.ItemsPanel>
+
+
+                    <ItemsControl.ItemTemplate>
+
+                        <DataTemplate>
+
+                            <Border Margin="7"
+                                    CornerRadius="12"
+                                    Background="{StaticResource CardBrush}"
+                                    BorderBrush="#CCED00"
+                                    BorderThickness="1.5"
+                                    ClipToBounds="True">
+
+                                <Grid>
+
+                                    <Grid.RowDefinitions>
+
+                                        <RowDefinition Height="220"/>
+
+                                        <RowDefinition Height="*"/>
+
+                                    </Grid.RowDefinitions>
+
+
+                                    <!-- ================================= -->
+                                    <!-- GAME IMAGE -->
+                                    <!-- ================================= -->
+
+                                    <Border Grid.Row="0"
+                                            CornerRadius="12,12,0,0"
+                                            ClipToBounds="True">
+
+                                        <Border.Background>
+                                            <ImageBrush ImageSource="{Binding ImagePath}"
+                                                        Stretch="Fill"/>
+                                        </Border.Background>
+
+                                        <Grid>
+
+                                            <Rectangle Fill="#000000"
+                                                    Opacity="0.18"/>
+
+                                            <!-- GENRE -->
+
+                                            <Border HorizontalAlignment="Left"
+                                                    VerticalAlignment="Top"
+                                                    Background="#CCED0088"
+                                                    CornerRadius="7"
+                                                    Padding="10,4"
+                                                    Margin="12">
+
+                                                <TextBlock Text="{Binding Genre}"
+                                                        Foreground="#FFFFFF"
+                                                        FontFamily="{StaticResource RajdhaniFont}"
+                                                        FontWeight="Bold"
+                                                        FontSize="11"/>
+
+                                            </Border>
+
+                                        </Grid>
+
+                                    </Border>
+
+
+                                    <!-- ================================= -->
+                                    <!-- INFORMATION -->
+                                    <!-- ================================= -->
+
+                                    <Grid Grid.Row="1"
+                                          Margin="16,8,16,9">
+
+                                        <Grid.RowDefinitions>
+
+                                            <RowDefinition Height="Auto"/>
+
+                                            <RowDefinition Height="*"/>
+
+                                            <RowDefinition Height="37"/>
+
+                                        </Grid.RowDefinitions>
+
+
+                                        <!-- TITLE -->
+
+                                        <TextBlock Grid.Row="0"
+                                                   Text="{Binding Title}"
+                                                   Foreground="{StaticResource TextPrimaryBrush}"
+                                                   FontFamily="{StaticResource OxaniumFont}"
+                                                   FontSize="19"
+                                                   FontWeight="Bold"
+                                                   Margin="0,0,0,4"
+                                                   TextTrimming="CharacterEllipsis"/>
+
+
+                                        <!-- DESCRIPTION -->
+
+                                        <TextBlock Grid.Row="1"
+                                                   Text="{Binding Description}"
+                                                   Foreground="{StaticResource TextSecondaryBrush}"
+                                                   FontFamily="{StaticResource NotoSansFont}"
+                                                   FontSize="14"
+                                                   LineHeight="20"
+                                                   TextWrapping="Wrap"
+                                                   VerticalAlignment="Top"/>
+
+
+                                        <!-- PLAY -->
+
+                                        <Button Grid.Row="2"
+                                                Style="{StaticResource PlayButtonStyle}"
+                                                Content="▶   PLAY GAME"
+                                                RenderTransformOrigin="0.5,0.5">
+                                            <Button.RenderTransform>
+                                                <TranslateTransform Y="-6"/>
+                                            </Button.RenderTransform>
+                                        </Button>
+
+                                    </Grid>
+
+                                </Grid>
+
+                            </Border>
+
+                        </DataTemplate>
+
+                    </ItemsControl.ItemTemplate>
+
+                </ItemsControl>
+
+            </Grid>
+
+
+            <!-- ================================================= -->
+            <!-- BOTTOM NAVIGATION -->
+            <!-- ================================================= -->
+
+            <Grid Grid.Row="2">
+
+                <Grid.ColumnDefinitions>
+
+                    <ColumnDefinition Width="*"/>
+
+                    <ColumnDefinition Width="Auto"/>
+
+                    <ColumnDefinition Width="*"/>
+
+                </Grid.ColumnDefinitions>
+
+
+                <!-- LEFT -->
+
+                <Button Grid.Column="0"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Content="‹"
+                        HorizontalAlignment="Right"
+                        Margin="0,0,12,0"
+                        Click="PreviousButton_Click"/>
+
+
+                <!-- CENTER -->
+
+                <StackPanel Grid.Column="1"
+                            Orientation="Vertical"
+                            HorizontalAlignment="Center"
+                            VerticalAlignment="Center">
+
+                    <StackPanel Orientation="Horizontal"
+                                HorizontalAlignment="Center">
+
+                        <Ellipse Width="11"
+                                 Height="11"
+                                 Margin="4">
+
+                            <Ellipse.Style>
+
+                                <Style TargetType="Ellipse">
+
+                                    <Setter Property="Fill"
+                                            Value="#555555"/>
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding CurrentPage}"
+                                                     Value="0">
+
+                                            <Setter Property="Fill"
+                                                    Value="#CCED00"/>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </Ellipse.Style>
+
+                        </Ellipse>
+
+
+                        <Ellipse Width="11"
+                                 Height="11"
+                                 Margin="4">
+
+                            <Ellipse.Style>
+
+                                <Style TargetType="Ellipse">
+
+                                    <Setter Property="Fill"
+                                            Value="#555555"/>
+
+                                    <Style.Triggers>
+
+                                        <DataTrigger Binding="{Binding CurrentPage}"
+                                                     Value="1">
+
+                                            <Setter Property="Fill"
+                                                    Value="#CCED00"/>
+
+                                        </DataTrigger>
+
+                                    </Style.Triggers>
+
+                                </Style>
+
+                            </Ellipse.Style>
+
+                        </Ellipse>
+
+                    </StackPanel>
+
+
+                    <TextBlock Text="Scroll untuk melihat lebih banyak game"
+                               Foreground="#D0D0D0"
+                               FontSize="12"
+                               HorizontalAlignment="Center"/>
+
+                </StackPanel>
+
+
+                <!-- RIGHT -->
+
+                <Button Grid.Column="2"
+                        Style="{StaticResource NavigationButtonStyle}"
+                        Content="›"
+                        HorizontalAlignment="Left"
+                        Margin="12,0,0,0"
+                        Click="NextButton_Click"/>
+
+            </Grid>
+
+        </Grid>
+
+    </Grid>
+
+</Window>
+
+# MainWindow.xaml.cs
+using System.Windows;
+using GARYGameLauncher.ViewModels;
+
+namespace GARYGameLauncher;
+
+public partial class MainWindow : Window
+{
+    private MainViewModel ViewModel =>
+        (MainViewModel)DataContext;
+
+    public MainWindow()
+    {
+        InitializeComponent();
+    }
+
+    private void NextButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.NextPage();
+    }
+
+    private void PreviousButton_Click(object sender, RoutedEventArgs e)
+    {
+        ViewModel.PreviousPage();
+    }
+
+    private void Window_KeyDown(object sender, System.Windows.Input.KeyEventArgs e)
+    {
+        if (e.Key == System.Windows.Input.Key.Escape)
+        {
+            Close();
+        }
+    }
+}
+
+# MainViewModel.cs
+using System.Collections.ObjectModel;
+using System.ComponentModel;
+using System.Runtime.CompilerServices;
+using GARYGameLauncher.Models;
+
+namespace GARYGameLauncher.ViewModels;
+
+public class MainViewModel : INotifyPropertyChanged
+{
+    private const int GamesPerPage = 8;
+
+    private int _currentPage = 0;
+
+    public ObservableCollection<Game> Games { get; } = new()
+    {
+        new Game
+        {
+            Title = "BRAKING BAD",
+            Genre = "RACING",
+            Description = "Rasakan sensasi balapan dan tantangan kecepatan di lintasan yang penuh kejutan.",
+            ImagePath = "Assets/Images/game_braking_bad.png"
+        },
+
+        new Game
+        {
+            Title = "TIME DISORDER",
+            Genre = "ACTION",
+            Description = "Hadapi kekacauan waktu dan temukan jalan keluar dari dunia yang terus berubah.",
+            ImagePath = "Assets/Images/game_time_disorder.png"
+        },
+
+        new Game
+        {
+            Title = "BALLDREAM",
+            Genre = "SPORT",
+            Description = "Buktikan kemampuanmu dan raih kemenangan dalam petualangan sepak bola.",
+            ImagePath = "Assets/Images/game_balldream.png"
+        },
+
+        new Game
+        {
+            Title = "DISTRACT",
+            Genre = "ADVENTURE",
+            Description = "Hadapi berbagai gangguan dan temukan cara untuk mencapai tujuanmu.",
+            ImagePath = "Assets/Images/game_distract.png"
+        },
+
+        new Game
+        {
+            Title = "INSECTROPY",
+            Genre = "ADVENTURE",
+            Description = "Masuki dunia serangga yang penuh misteri dan tantangan.",
+            ImagePath = "Assets/Images/game_insectropy.png"
+        },
+
+        new Game
+        {
+            Title = "CODE DEFENDER",
+            Genre = "STRATEGY",
+            Description = "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.",
+            ImagePath = "Assets/Images/game_code_defender.png"
+        },
+
+        new Game
+        {
+            Title = "DINE",
+            Genre = "SIMULATION",
+            Description = "Kelola restoranmu dan layani pelanggan dalam pengalaman memasak yang unik.",
+            ImagePath = "Assets/Images/game_dine.png"
+        },
+
+        new Game
+        {
+            Title = "ARCHEMISTS CHRONICLES",
+            Genre = "RPG",
+            Description = "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.",
+            ImagePath = "Assets/Images/game_archemists_chronicles.png"
+        },
+
+        // PAGE 2
+
+        new Game
+        {
+            Title = "UPRISING",
+            Genre = "ACTION",
+            Description = "Bangkit melawan kekuatan yang menguasai dunia dan tentukan masa depanmu.",
+            ImagePath = "Assets/Images/game_uprising.png"
+        },
+
+        new Game
+        {
+            Title = "PUAKA",
+            Genre = "HORROR",
+            Description = "Hadapi kengerian dan misteri yang tersembunyi di balik dunia yang gelap.",
+            ImagePath = "Assets/Images/game_puaka.png"
+        },
+    };
+
+    public ObservableCollection<Game> CurrentPageGames { get; } = new();
+
+    public int CurrentPage
+    {
+        get => _currentPage;
+        private set
+        {
+            if (_currentPage == value)
+                return;
+
+            _currentPage = value;
+            OnPropertyChanged();
+            OnPropertyChanged(nameof(CurrentPageNumber));
+            OnPropertyChanged(nameof(IsFirstPage));
+            OnPropertyChanged(nameof(IsLastPage));
+
+            UpdateCurrentPageGames();
+        }
+    }
+
+    public int CurrentPageNumber => CurrentPage + 1;
+
+    public int PageCount =>
+        (int)Math.Ceiling((double)Games.Count / GamesPerPage);
+
+    public bool IsFirstPage => CurrentPage == 0;
+
+    public bool IsLastPage => CurrentPage >= PageCount - 1;
+
+    public MainViewModel()
+    {
+        UpdateCurrentPageGames();
+    }
+
+    public void NextPage()
+    {
+        if (!IsLastPage)
+        {
+            CurrentPage++;
+        }
+    }
+
+    public void PreviousPage()
+    {
+        if (!IsFirstPage)
+        {
+            CurrentPage--;
+        }
+    }
+
+    private void UpdateCurrentPageGames()
+    {
+        CurrentPageGames.Clear();
+
+        int startIndex = CurrentPage * GamesPerPage;
+
+        var gamesForPage = Games
+            .Skip(startIndex)
+            .Take(GamesPerPage);
+
+        foreach (var game in gamesForPage)
+        {
+            CurrentPageGames.Add(game);
+        }
+
+        OnPropertyChanged(nameof(CurrentPageGames));
+    }
+
+    public event PropertyChangedEventHandler? PropertyChanged;
+
+    private void OnPropertyChanged(
+        [CallerMemberName] string? propertyName = null)
+    {
+        PropertyChanged?.Invoke(
+            this,
+            new PropertyChangedEventArgs(propertyName));
+    }
+}
+
+# Game.cs
+namespace GARYGameLauncher.Models;
+
+public class Game
+{
+    public string Title { get; set; } = string.Empty;
+
+    public string Genre { get; set; } = string.Empty;
+
+    public string Description { get; set; } = string.Empty;
+
+    public string ImagePath { get; set; } = string.Empty;
+
+    public string ExecutablePath { get; set; } = string.Empty;
+}
