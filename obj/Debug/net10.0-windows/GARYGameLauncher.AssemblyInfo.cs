@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("GARYGameLauncher")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+3a54026fe45f6b5ec8856ac53f20e8ebfc4bd7dd")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+fb112da70833b2499972200d539e519af3730ab3")]
 [assembly: System.Reflection.AssemblyProductAttribute("GARYGameLauncher")]
 [assembly: System.Reflection.AssemblyTitleAttribute("GARYGameLauncher")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]

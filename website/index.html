@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>GARY Game Hub</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Oxanium:wght@600;700;800&family=Rajdhani:wght@600;700&family=Noto+Sans:wght@400;600;700&display=swap" rel="stylesheet">
+<style>
+  :root{
+    --bg:#020504;
+    --card:#050B08;
+    --green:#CCED00;
+    --green-dark:#3A4700;
+    --green-press:#AFC900;
+    --text-primary:#FFFFFF;
+    --text-secondary:#D2D2D2;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    font-family:'Noto Sans', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+  }
+
+  .wrap{ width:100%; max-width:1200px; }
+
+  .corner{ position:fixed; opacity:.35; pointer-events:none; z-index:0; }
+  .corner svg{ display:block; }
+
+  header{ text-align:center; margin-bottom:36px; position:relative; z-index:1; }
+  header .logo{
+    height:55px;
+    width:auto;
+    object-fit:contain;
+    margin-bottom:10px;
+  }
+  header .title{
+    font-family:'Oxanium', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+  }
+  header .title span.g{ color:#F5F5F5; }
+  header .title span.a{ color:var(--green); }
+  header p{
+    margin:2px 0 0;
+    color:#EEEEEE;
+    font-weight:700;
+    font-size:1.1rem;
+    letter-spacing:.5px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    position:relative;
+    z-index:1;
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:520px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--card);
+    border:1.5px solid var(--green);
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .card .thumb{
+    height:170px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--thumb-color, #222), #000);
+    overflow:hidden;
+  }
+  .card .thumb img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .card .thumb::after{
+    content:"";
+    position:absolute; inset:0;
+    background:#000; opacity:.18;
+    z-index:0;
+  }
+  .card .thumb .letter{
+    font-family:'Oxanium', sans-serif;
+    font-weight:800;
+    font-size:3.5rem;
+    color:rgba(255,255,255,.08);
+    position:relative; z-index:1;
+  }
+  .genre-tag{
+    position:absolute; top:12px; left:12px; z-index:2;
+    background:#CCED0088;
+    color:#fff;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:7px;
+    letter-spacing:.5px;
+  }
+
+  .card .info{
+    padding:14px 16px 15px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .card h3{
+    font-family:'Oxanium', sans-serif;
+    color:var(--text-primary);
+    font-size:1.1rem;
+    font-weight:700;
+    margin:0 0 6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .card p{
+    color:var(--text-secondary);
+    font-size:.85rem;
+    line-height:1.4;
+    margin:0 0 12px;
+    flex:1;
+  }
+
+  .play-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background:var(--green);
+    color:#050805;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+    font-weight:700;
+    font-size:.85rem;
+    text-decoration:none;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .play-btn:hover{ background:var(--green-dark); color:#fff; }
+  .play-btn:active{ background:var(--green-press); }
+
+  /* NAVIGATION */
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    margin-top:32px;
+    position:relative;
+    z-index:1;
+  }
+  .nav-btn{
+    width:42px; height:42px;
+    border-radius:12px;
+    border:2px solid var(--green);
+    background:transparent;
+    color:var(--green);
+    font-size:22px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease;
+  }
+  .nav-btn:hover:not(:disabled){ background:#163000; }
+  .nav-btn:disabled{ opacity:.3; cursor:default; }
+
+  .nav-center{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .dots{ display:flex; gap:8px; }
+  .dot{ width:11px; height:11px; border-radius:50%; background:#555555; }
+  .dot.active{ background:var(--green); }
+  .nav-center small{ color:#D0D0D0; font-size:12px; }
+</style>
+</head>
+<body>
+
+<div class="wrap">
+  <header>
+    <img class="logo" src="Assets/Images/gary_logo.png" alt="GARY logo" onerror="this.remove()" />
+    <div class="title"><span class="g">GARY</span><span class="a"> GAME HUB</span></div>
+    <p>Learn &nbsp;•&nbsp; Develop &nbsp;•&nbsp; Fun</p>
+  </header>
+
+  <div id="grid" class="grid"></div>
+
+  <div class="nav">
+    <button id="prevBtn" class="nav-btn">&#8249;</button>
+    <div class="nav-center">
+      <div id="dots" class="dots"></div>
+      <small>Klik untuk ganti halaman</small>
+    </div>
+    <button id="nextBtn" class="nav-btn">&#8250;</button>
+  </div>
+</div>
+
+<script>
+  const GAMES = [
+    { title: "BRAKING BAD", genre: "RACING", description: "Rasakan sensasi balapan dan tantangan kecepatan di lintasan yang penuh kejutan.", color: "#3a2a00", image: "Assets/Images/game_braking_bad.png", itchUrl: "https://vsalexs.itch.io/braking-bad" },
+    { title: "TIME DISORDER", genre: "ACTION", description: "Hadapi kekacauan waktu dan temukan jalan keluar dari dunia yang terus berubah.", color: "#1a2a3a", image: "Assets/Images/game_time_disorder.png", itchUrl: "https://vsalexs.itch.io/time-disorder" },
+    { title: "BALLDREAM", genre: "SPORT", description: "Buktikan kemampuanmu dan raih kemenangan dalam petualangan sepak bola.", color: "#0a3a1a", image: "Assets/Images/game_balldream.png", itchUrl: "https://allione-studio.itch.io/balldream" },
+    { title: "DISTRACT", genre: "ADVENTURE", description: "Hadapi berbagai gangguan dan temukan cara untuk mencapai tujuanmu.", color: "#3a0a2a", image: "Assets/Images/game_distract.png", itchUrl: "https://darith-dev.itch.io/distract" },
+    { title: "INSECTROPY", genre: "ADVENTURE", description: "Masuki dunia serangga yang penuh misteri dan tantangan.", color: "#2a3a0a", image: "Assets/Images/game_insectropy.png", itchUrl: "https://hamgarian.itch.io/insectropy" },
+    { title: "CODE DEFENDER", genre: "STRATEGY", description: "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.", color: "#0a2a3a", image: "Assets/Images/game_code_defender.png", itchUrl: "https://raftfeed.itch.io/ini-projek-gekave" },
+    { title: "DINE", genre: "SIMULATION", description: "Kelola restoranmu dan layani pelanggan dalam pengalaman memasak yang unik.", color: "#3a1a0a", image: "Assets/Images/game_dine.png", itchUrl: "https://rad3nz.itch.io/dine" },
+    { title: "ARCHEMISTS CHRONICLES", genre: "RPG", description: "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.", color: "#2a0a3a", image: "Assets/Images/game_archemists_chronicles.png", itchUrl: "https://zephx.itch.io/archemists-chronicles" },
+    { title: "UPRISING", genre: "ACTION", description: "Bangkit melawan kekuatan yang menguasai dunia dan tentukan masa depanmu.", color: "#3a0a0a", image: "Assets/Images/game_uprising.png", itchUrl: "https://zephx.itch.io/uprising0" },
+    { title: "PUAKA", genre: "HORROR", description: "Hadapi kengerian dan misteri yang tersembunyi di balik dunia yang gelap.", color: "#0a0a0a", image: "Assets/Images/game_puaka.png", itchUrl: "https://zephx.itch.io/puaka" },
+  ];
+
+  const GAMES_PER_PAGE = 8;
+
+  const hoverSound = new Audio("Assets/Audio/hover_card.wav");
+  const clickSound = new Audio("Assets/Audio/click_play.wav");
+  hoverSound.volume = 0.4;
+  clickSound.volume = 0.6;
+
+  function playSound(audio){
+    audio.currentTime = 0;
+    audio.play().catch(() => {});
+  }
+  let currentPage = 0;
+  const pageCount = Math.ceil(GAMES.length / GAMES_PER_PAGE);
+
+  const grid = document.getElementById("grid");
+  const dotsEl = document.getElementById("dots");
+  const prevBtn = document.getElementById("prevBtn");
+  const nextBtn = document.getElementById("nextBtn");
+
+  function render(){
+    // GRID
+    const start = currentPage * GAMES_PER_PAGE;
+    const pageGames = GAMES.slice(start, start + GAMES_PER_PAGE);
+
+    grid.innerHTML = pageGames.map(g => `
+      <div class="card">
+        <div class="thumb" style="--thumb-color:${g.color}">
+          <img src="${g.image}" alt="${g.title}" onerror="this.remove()" />
+          <span class="genre-tag">${g.genre}</span>
+          <span class="letter">${g.title.charAt(0)}</span>
+        </div>
+        <div class="info">
+          <h3>${g.title}</h3>
+          <p>${g.description}</p>
+          <a class="play-btn" data-hover-sound data-click-sound href="${g.itchUrl}" target="_blank" rel="noopener noreferrer">
+            &#9654; PLAY GAME
+          </a>
+        </div>
+      </div>
+    `).join("");
+
+    // SOUND
+    grid.querySelectorAll("[data-hover-sound]").forEach(btn => {
+      btn.addEventListener("mouseenter", () => playSound(hoverSound));
+    });
+    grid.querySelectorAll("[data-click-sound]").forEach(btn => {
+      btn.addEventListener("click", () => playSound(clickSound));
+    });
+
+    // DOTS
+    dotsEl.innerHTML = Array.from({ length: pageCount })
+      .map((_, i) => `<span class="dot ${i === currentPage ? "active" : ""}"></span>`)
+      .join("");
+
+    // NAV STATE
+    prevBtn.disabled = currentPage === 0;
+    nextBtn.disabled = currentPage >= pageCount - 1;
+  }
+
+  prevBtn.addEventListener("click", () => {
+    if (currentPage > 0){ currentPage--; render(); }
+  });
+  nextBtn.addEventListener("click", () => {
+    if (currentPage < pageCount - 1){ currentPage++; render(); }
+  });
+
+  render();
+</script>
+</body>
+</html>

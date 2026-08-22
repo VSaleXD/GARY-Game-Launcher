@@ -1,26 +1,26 @@
 {
-  "version": 4,
+  "version": 3,
   "targets": {
-    "net10.0-windows": {}
+    "net10.0-windows7.0": {}
   },
   "libraries": {},
   "projectFileDependencyGroups": {
-    "net10.0-windows": []
+    "net10.0-windows7.0": []
   },
   "packageFolders": {
-    "C:\\Users\\Darith\\.nuget\\packages\\": {}
+    "C:\\Users\\HP\\.nuget\\packages\\": {}
   },
   "project": {
     "version": "1.0.0",
     "restore": {
-      "projectUniqueName": "C:\\Users\\Darith\\Documents\\Documents\\My Projects\\GARY Game Launcher\\GARYGameLauncher\\GARYGameLauncher.csproj",
+      "projectUniqueName": "D:\\User\\Documents\\TugasWebsite\\GaryGameLauncher\\GARY-Game-Launcher\\GARYGameLauncher.csproj",
       "projectName": "GARYGameLauncher",
-      "projectPath": "C:\\Users\\Darith\\Documents\\Documents\\My Projects\\GARY Game Launcher\\GARYGameLauncher\\GARYGameLauncher.csproj",
-      "packagesPath": "C:\\Users\\Darith\\.nuget\\packages\\",
-      "outputPath": "C:\\Users\\Darith\\Documents\\Documents\\My Projects\\GARY Game Launcher\\GARYGameLauncher\\obj\\",
+      "projectPath": "D:\\User\\Documents\\TugasWebsite\\GaryGameLauncher\\GARY-Game-Launcher\\GARYGameLauncher.csproj",
+      "packagesPath": "C:\\Users\\HP\\.nuget\\packages\\",
+      "outputPath": "D:\\User\\Documents\\TugasWebsite\\GaryGameLauncher\\GARY-Game-Launcher\\obj\\",
       "projectStyle": "PackageReference",
       "configFilePaths": [
-        "C:\\Users\\Darith\\AppData\\Roaming\\NuGet\\NuGet.Config"
+        "C:\\Users\\HP\\AppData\\Roaming\\NuGet\\NuGet.Config"
       ],
       "originalTargetFrameworks": [
         "net10.0-windows"
@@ -29,8 +29,7 @@
         "https://api.nuget.org/v3/index.json": {}
       },
       "frameworks": {
-        "net10.0-windows": {
-          "framework": "net10.0-windows7.0",
+        "net10.0-windows7.0": {
           "targetAlias": "net10.0-windows",
           "projectReferences": {}
         }
@@ -45,11 +44,10 @@
         "auditLevel": "low",
         "auditMode": "all"
       },
-      "SdkAnalysisLevel": "10.0.300"
+      "SdkAnalysisLevel": "10.0.100"
     },
     "frameworks": {
-      "net10.0-windows": {
-        "framework": "net10.0-windows7.0",
+      "net10.0-windows7.0": {
         "targetAlias": "net10.0-windows",
         "imports": [
           "net461",
@@ -70,7 +68,7 @@
             "privateAssets": "none"
           }
         },
-        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.302/PortableRuntimeIdentifierGraph.json",
+        "runtimeIdentifierGraphPath": "C:\\Program Files\\dotnet\\sdk\\10.0.103/PortableRuntimeIdentifierGraph.json",
         "packagesToPrune": {
           "Microsoft.CSharp": "(,4.7.32767]",
           "Microsoft.VisualBasic": "(,10.4.32767]",
