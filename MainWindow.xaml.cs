@@ -4,6 +4,9 @@ using System.Windows;
 using System.Windows.Media;
 using GARYGameLauncher.ViewModels;
 
+using System.Diagnostics;
+using GARYGameLauncher.Models;
+
 namespace GARYGameLauncher;
 
 public partial class MainWindow : Window
@@ -84,6 +87,73 @@ public partial class MainWindow : Window
         RoutedEventArgs e)
     {
         PlaySound("Assets/Audio/click_play.wav");
+
+        if (sender is not FrameworkElement element)
+        return;
+
+        if (element.DataContext is not Game game)
+            return;
+
+        LaunchGame(game);
+    }
+
+    private void LaunchGame(Game game)
+    {
+        try
+        {
+            if (game.LaunchType == GameLaunchType.Web)
+            {
+                if (string.IsNullOrWhiteSpace(game.WebUrl))
+                    return;
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = game.WebUrl,
+                    UseShellExecute = true
+                });
+
+                Close();
+                return;
+            }
+
+            if (game.LaunchType == GameLaunchType.Executable)
+            {
+                if (string.IsNullOrWhiteSpace(game.ExecutablePath))
+                    return;
+
+                string executablePath =
+                    System.IO.Path.GetFullPath(game.ExecutablePath);
+
+                if (!System.IO.File.Exists(executablePath))
+                {
+                    MessageBox.Show(
+                        $"Game tidak ditemukan:\n{executablePath}",
+                        "Game Tidak Ditemukan",
+                        MessageBoxButton.OK,
+                        MessageBoxImage.Warning);
+
+                    return;
+                }
+
+                Process.Start(new ProcessStartInfo
+                {
+                    FileName = executablePath,
+                    WorkingDirectory =
+                        System.IO.Path.GetDirectoryName(executablePath),
+                    UseShellExecute = true
+                });
+
+                Close();
+            }
+        }
+        catch (Exception ex)
+        {
+            MessageBox.Show(
+                $"Gagal membuka game:\n\n{ex.Message}",
+                "Gagal Menjalankan Game",
+                MessageBoxButton.OK,
+                MessageBoxImage.Error);
+        }
     }
 
     // =========================

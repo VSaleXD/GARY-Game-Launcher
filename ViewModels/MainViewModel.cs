@@ -19,16 +19,22 @@ public class MainViewModel : INotifyPropertyChanged
             Genre = "LOCAL MULTIPLAYER RACING",
             GenreColor = "#FF5C5C",
             Description = "Bertanding dalam berbagai minigame kacau menggunakan mobil bersama teman.",
-            ImagePath = "Assets/Images/game_braking_bad.png"
+            ImagePath = "Assets/Images/game_braking_bad.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://vsalexs.itch.io/braking-bad"
         },
 
         new Game
         {
             Title = "TIME DISORDER",
             Genre = "ACTION RUNNER",
-            GenreColor = "#FF9F43",
+            GenreColor = "#FFD166",
             Description = "Gunakan manipulasi waktu dan dash untuk memburu musuh di kota futuristik.",
-            ImagePath = "Assets/Images/game_time_disorder.png"
+            ImagePath = "Assets/Images/game_time_disorder.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://vsalexs.itch.io/time-disorder"
         },
 
         new Game
@@ -37,25 +43,34 @@ public class MainViewModel : INotifyPropertyChanged
             Genre = "3D PLATFORMER",
             GenreColor = "#4D96FF",
             Description = "Kendalikan bola melewati dunia mimpi penuh rintangan untuk menemukan jalan keluar.",
-            ImagePath = "Assets/Images/game_balldream.png"
+            ImagePath = "Assets/Images/game_balldream.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/BallDream/BallDream.exe"
         },
 
         new Game
         {
-            Title = "DISTRACT",
+            Title = "D!STRACT",
             Genre = "TOWER DEFENSE",
             GenreColor = "#A66CFF",
             Description = "Gunakan alat produktivitas untuk menghentikan berbagai distraksi yang menyerang.",
-            ImagePath = "Assets/Images/game_distract.png"
+            ImagePath = "Assets/Images/game_distract.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/D!stract/D!stract.exe"
         },
 
         new Game
         {
             Title = "INSECTROPY",
             Genre = "TACTICAL ROGUELIKE",
-            GenreColor = "#6B4526",
+            GenreColor = "#B87941",
             Description = "Dua semut bertarung secara taktis menggunakan dadu dan artefak untuk mengalahkan tujuh dosa mematikan.",
-            ImagePath = "Assets/Images/game_insectropy.png"
+            ImagePath = "Assets/Images/game_insectropy.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://hamgarian.itch.io/insectropy"
         },
 
         new Game
@@ -64,45 +79,108 @@ public class MainViewModel : INotifyPropertyChanged
             Genre = "SHOOTER ACTION",
             GenreColor = "#00C9A7",
             Description = "Menjadi sistem pertahanan kode untuk melawan virus yang merusak program.",
-            ImagePath = "Assets/Images/game_code_defender.png"
+            ImagePath = "Assets/Images/game_code_defender.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://raftfeed.itch.io/ini-projek-gekave"
         },
 
         new Game
         {
             Title = "DINE",
             Genre = "HORROR",
-            GenreColor = "#7A1F1F",
+            GenreColor = "#C62828",
             Description = "Bermain sebagai skinwalker yang harus menyamar dan bertahan hidup dari para pemburu hingga pagi.",
-            ImagePath = "Assets/Images/game_dine.png"
+            ImagePath = "Assets/Images/game_dine.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/Dine/Dine.exe"
         },
 
         new Game
         {
-            Title = "ARCHEMISTS CHRONICLES",
-            Genre = "RPG",
-            GenreColor = "#285C35",
-            Description = "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.",
-            ImagePath = "Assets/Images/game_archemists_chronicles.png"
+            Title = "UPRISING",
+            Genre = "VERTICAL PLATFORMER",
+            GenreColor = "#4D96FF",
+            Description = "Tahanan menggunakan bola besi yang terikat di kakinya untuk melontarkan diri menuju permukaan.",
+            ImagePath = "Assets/Images/game_uprising.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://zephx.itch.io/uprising0"
         },
 
         // PAGE 2
 
         new Game
         {
-            Title = "UPRISING",
-            Genre = "PLATFORMER",
+            Title = "PUAKA",
+            Genre = "SHOOTER PLATFORMER",
             GenreColor = "#4D96FF",
-            Description = "Tahanan menggunakan bola besi yang terikat di kakinya untuk melontarkan diri menuju permukaan.",
-            ImagePath = "Assets/Images/game_uprising.png"
+            Description = "Skeleton dan roh api menyerbu kastil misterius dalam platformer shooter bergaya retro.",
+            ImagePath = "Assets/Images/game_puaka.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/Puaka/Puaka.exe"
         },
 
         new Game
         {
-            Title = "PUAKA",
-            Genre = "PLATFORMER SHOOTER",
-            GenreColor = "#FF7043",
-            Description = "Skeleton dan roh api menyerbu kastil misterius dalam platformer shooter bergaya retro.",
-            ImagePath = "Assets/Images/game_puaka.png"
+            Title = "ECHOES",
+            Genre = "PUZZLE PLATFORMER",
+            GenreColor = "#4D96FF",
+            Description = "Game platformer dimana kematianmu sebelumnya akan membantumu melewati puzzle dan rintangan.",
+            ImagePath = "Assets/Images/game_echoes.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://ramjing.itch.io/echoes"
+        },
+
+        new Game
+        {
+            Title = "HOP",
+            Genre = "VERTICAL PLATFORMER",
+            GenreColor = "#4D96FF",
+            Description = "Atur kekuatan lompatan kelinci untuk mencapai puncak tanpa jatuh dan mati.",
+            ImagePath = "Assets/Images/game_hop.png",
+
+            LaunchType = GameLaunchType.Web,
+            WebUrl = "https://ramjing.itch.io/hop"
+        },
+
+        new Game
+        {
+            Title = "MAGISTAR",
+            Genre = "TOWER DEFENSE",
+            GenreColor = "#A66CFF",
+            Description = "Gunakan kombinasi elemen api, air, dan tumbuhan untuk mempertahankan istana dari serangan musuh.",
+            ImagePath = "Assets/Images/game_magistar.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/Magistar/Magistar.exe"
+        },
+
+        new Game
+        {
+            Title = "DYSTOPIA RUN",
+            Genre = "ENDLESS RUNNER",
+            GenreColor = "#FFD166",
+            Description = "Berlari tanpa henti melewati rintangan sambil mengatur energi lompatan untuk bertahan hidup",
+            ImagePath = "Assets/Images/game_dystopia_run.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/Dystopia Run.exe"
+        },
+
+        new Game
+        {
+            Title = "IPB RUNNERS",
+            Genre = "ENDLESS RUNNER",
+            GenreColor = "#FFD166",
+            Description = "Mahasiswa IPB melompati mobil ala Google Dino hingga akhirnya berakhir di ruang wisuda.",
+            ImagePath = "Assets/Images/game_ipb_runners.png",
+
+            LaunchType = GameLaunchType.Executable,
+            ExecutablePath = "Games/IPB Runners/IPB Runners.exe"
         },
     };
 
