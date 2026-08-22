@@ -98,13 +98,6 @@
     background:#000; opacity:.18;
     z-index:0;
   }
-  .card .thumb .letter{
-    font-family:'Oxanium', sans-serif;
-    font-weight:800;
-    font-size:3.5rem;
-    color:rgba(255,255,255,.08);
-    position:relative; z-index:1;
-  }
   .genre-tag{
     position:absolute; top:12px; left:12px; z-index:2;
     background:#CCED0088;
@@ -206,7 +199,7 @@
     <button id="prevBtn" class="nav-btn">&#8249;</button>
     <div class="nav-center">
       <div id="dots" class="dots"></div>
-      <small>Klik untuk ganti halaman</small>
+      <small>Scroll untuk melihat lebih banyak game</small>
     </div>
     <button id="nextBtn" class="nav-btn">&#8250;</button>
   </div>
@@ -219,7 +212,7 @@
     { title: "BALLDREAM", genre: "SPORT", description: "Buktikan kemampuanmu dan raih kemenangan dalam petualangan sepak bola.", color: "#0a3a1a", image: "Assets/Images/game_balldream.png", itchUrl: "https://allione-studio.itch.io/balldream" },
     { title: "DISTRACT", genre: "ADVENTURE", description: "Hadapi berbagai gangguan dan temukan cara untuk mencapai tujuanmu.", color: "#3a0a2a", image: "Assets/Images/game_distract.png", itchUrl: "https://darith-dev.itch.io/distract" },
     { title: "INSECTROPY", genre: "ADVENTURE", description: "Masuki dunia serangga yang penuh misteri dan tantangan.", color: "#2a3a0a", image: "Assets/Images/game_insectropy.png", itchUrl: "https://hamgarian.itch.io/insectropy" },
-    { title: "CODE DEFENDER", genre: "STRATEGY", description: "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.", color: "#0a2a3a", image: "Assets/Images/game_code_defender.png", itchUrl: "https://raftfeed.itch.io/ini-projek-gekave" },
+    { title: "CODE DEFENDER", genre: "STRATEGY", description: "Gunakan logika dan strategi untuk mempertahankan sistem dari ancaman.", color: "#0a2a3a", image: "Assets/Images/game_code_defender.png", itchUrl: "https://YOURUSERNAME.itch.io/code-defender" },
     { title: "DINE", genre: "SIMULATION", description: "Kelola restoranmu dan layani pelanggan dalam pengalaman memasak yang unik.", color: "#3a1a0a", image: "Assets/Images/game_dine.png", itchUrl: "https://rad3nz.itch.io/dine" },
     { title: "ARCHEMISTS CHRONICLES", genre: "RPG", description: "Ikuti perjalanan para penyihir dan ungkap rahasia dunia yang penuh misteri.", color: "#2a0a3a", image: "Assets/Images/game_archemists_chronicles.png", itchUrl: "https://zephx.itch.io/archemists-chronicles" },
     { title: "UPRISING", genre: "ACTION", description: "Bangkit melawan kekuatan yang menguasai dunia dan tentukan masa depanmu.", color: "#3a0a0a", image: "Assets/Images/game_uprising.png", itchUrl: "https://zephx.itch.io/uprising0" },
@@ -235,7 +228,7 @@
 
   function playSound(audio){
     audio.currentTime = 0;
-    audio.play().catch(() => {});
+    audio.play().catch(() => {}); 
   }
   let currentPage = 0;
   const pageCount = Math.ceil(GAMES.length / GAMES_PER_PAGE);
@@ -255,7 +248,6 @@
         <div class="thumb" style="--thumb-color:${g.color}">
           <img src="${g.image}" alt="${g.title}" onerror="this.remove()" />
           <span class="genre-tag">${g.genre}</span>
-          <span class="letter">${g.title.charAt(0)}</span>
         </div>
         <div class="info">
           <h3>${g.title}</h3>
@@ -267,7 +259,7 @@
       </div>
     `).join("");
 
-    // SOUND
+    // SOUND EVENTS
     grid.querySelectorAll("[data-hover-sound]").forEach(btn => {
       btn.addEventListener("mouseenter", () => playSound(hoverSound));
     });
