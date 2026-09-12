@@ -348,7 +348,8 @@
                                 CornerRadius="12"
                                 Background="{StaticResource CardBrush}"
                                 Style="{StaticResource GameCardStyle}"
-                                ClipToBounds="True">
+                                ClipToBounds="True"
+                                MouseEnter="GameCard_MouseEnter">
 
                                 <Grid>
 
@@ -449,7 +450,8 @@
                                         <Button Grid.Row="2"
                                                 Style="{StaticResource PlayButtonStyle}"
                                                 Content="▶   PLAY GAME"
-                                                RenderTransformOrigin="0.5,0.5">
+                                                RenderTransformOrigin="0.5,0.5"
+                                                Click="PlayButton_Click">
                                             <Button.RenderTransform>
                                                 <TranslateTransform Y="-6"/>
                                             </Button.RenderTransform>
