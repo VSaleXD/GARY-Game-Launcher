@@ -1,0 +1,174 @@
+:root{
+    --bg:#020504;
+    --card:#050B08;
+    --green:#CCED00;
+    --green-dark:#3A4700;
+    --green-press:#AFC900;
+    --text-primary:#FFFFFF;
+    --text-secondary:#D2D2D2;
+  }
+
+  *{ box-sizing:border-box; }
+
+  body{
+    margin:0;
+    min-height:100vh;
+    background:var(--bg);
+    font-family:'Noto Sans', sans-serif;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    padding:32px 16px;
+  }
+
+  .wrap{ width:100%; max-width:1200px; }
+
+  .corner{ position:fixed; opacity:.35; pointer-events:none; z-index:0; }
+  .corner svg{ display:block; }
+
+  header{ text-align:center; margin-bottom:36px; position:relative; z-index:1; }
+  header .logo{
+    height:55px;
+    width:auto;
+    object-fit:contain;
+    margin-bottom:10px;
+  }
+  header .title{
+    font-family:'Oxanium', sans-serif;
+    font-weight:800;
+    font-size:clamp(2.4rem, 6vw, 3.6rem);
+  }
+  header .title span.g{ color:#F5F5F5; }
+  header .title span.a{ color:var(--green); }
+  header p{
+    margin:2px 0 0;
+    color:#EEEEEE;
+    font-weight:700;
+    font-size:1.1rem;
+    letter-spacing:.5px;
+  }
+
+  .grid{
+    display:grid;
+    grid-template-columns:repeat(4, 1fr);
+    gap:16px;
+    position:relative;
+    z-index:1;
+  }
+  @media (max-width:900px){ .grid{ grid-template-columns:repeat(2, 1fr); } }
+  @media (max-width:520px){ .grid{ grid-template-columns:1fr; } }
+
+  .card{
+    background:var(--card);
+    border:1.5px solid var(--green);
+    border-radius:12px;
+    overflow:hidden;
+    display:flex;
+    flex-direction:column;
+  }
+
+  .card .thumb{
+    height:170px;
+    position:relative;
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    background:linear-gradient(135deg, var(--thumb-color, #222), #000);
+    overflow:hidden;
+  }
+  .card .thumb img{
+    position:absolute; inset:0;
+    width:100%; height:100%;
+    object-fit:cover;
+    z-index:0;
+  }
+  .card .thumb::after{
+    content:"";
+    position:absolute; inset:0;
+    background:#000; opacity:.18;
+    z-index:0;
+  }
+  .genre-tag{
+    position:absolute; top:12px; left:12px; z-index:2;
+    background:#CCED0088;
+    color:#fff;
+    font-family:'Rajdhani', sans-serif;
+    font-weight:700;
+    font-size:11px;
+    padding:4px 10px;
+    border-radius:7px;
+    letter-spacing:.5px;
+  }
+
+  .card .info{
+    padding:14px 16px 15px;
+    display:flex;
+    flex-direction:column;
+    flex:1;
+  }
+  .card h3{
+    font-family:'Oxanium', sans-serif;
+    color:var(--text-primary);
+    font-size:1.1rem;
+    font-weight:700;
+    margin:0 0 6px;
+    white-space:nowrap;
+    overflow:hidden;
+    text-overflow:ellipsis;
+  }
+  .card p{
+    color:var(--text-secondary);
+    font-size:.85rem;
+    line-height:1.4;
+    margin:0 0 12px;
+    flex:1;
+  }
+
+  .play-btn{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:6px;
+    background:var(--green);
+    color:#050805;
+    border:none;
+    border-radius:8px;
+    padding:10px;
+    font-weight:700;
+    font-size:.85rem;
+    text-decoration:none;
+    cursor:pointer;
+    transition:background .15s ease;
+  }
+  .play-btn:hover{ background:var(--green-dark); color:#fff; }
+  .play-btn:active{ background:var(--green-press); }
+
+  /* NAVIGATION */
+  .nav{
+    display:flex;
+    align-items:center;
+    justify-content:center;
+    gap:24px;
+    margin-top:32px;
+    position:relative;
+    z-index:1;
+  }
+  .nav-btn{
+    width:42px; height:42px;
+    border-radius:12px;
+    border:2px solid var(--green);
+    background:transparent;
+    color:var(--green);
+    font-size:22px;
+    cursor:pointer;
+    display:flex; align-items:center; justify-content:center;
+    transition:background .15s ease;
+  }
+  .nav-btn:hover:not(:disabled){ background:#163000; }
+  .nav-btn:disabled{ opacity:.3; cursor:default; }
+
+  .nav-center{ display:flex; flex-direction:column; align-items:center; gap:6px; }
+  .dots{ display:flex; gap:8px; }
+  .dot{ width:11px; height:11px; border-radius:50%; background:#555555; }
+  .dot.active{ background:var(--green); }
+  .nav-center small{ color:#D0D0D0; font-size:12px; }
