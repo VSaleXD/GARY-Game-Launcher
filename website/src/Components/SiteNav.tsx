@@ -5,7 +5,7 @@ export default function SiteNav() {
   return (
     <nav className="site-nav">
       <Link className="brand-button" to="/">
-        <img src="/Assets/Images/gary_logo.png" alt="GARY" />
+        <img src={logo} alt="GARY" />
         <span>GARY</span>
       </Link>
       <div className="nav-links">
