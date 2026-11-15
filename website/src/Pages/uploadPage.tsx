@@ -16,19 +16,19 @@ export default function UploadPage() {
   const [message, setMessage] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  function verifyAccess(event: FormEvent<HTMLFormElement>) {
-    event.preventDefault();
-    setError("");
-    if (!ACCESS_CODE) {
-      setError("Kode akses belum dikonfigurasi. Isi VITE_GARY_UPLOAD_CODE di Website/.env.local.");
-      return;
-    }
-    if (accessCode !== ACCESS_CODE) {
-      setError("Kode akses tidak valid.");
-      return;
-    }
-    setAuthorized(true);
-  }
+  // function verifyAccess(event: FormEvent<HTMLFormElement>) {
+  //   event.preventDefault();
+  //   setError("");
+  //   if (!ACCESS_CODE) {
+  //     setError("Kode akses belum dikonfigurasi. Isi VITE_GARY_UPLOAD_CODE di Website/.env.local.");
+  //     return;
+  //   }
+  //   if (accessCode !== ACCESS_CODE) {
+  //     setError("Kode akses tidak valid.");
+  //     return;
+  //   }
+  //   setAuthorized(true);
+  // }
 
   async function uploadFile(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -90,13 +90,13 @@ export default function UploadPage() {
           <h1>Upload {label}</h1>
           <p>Halaman khusus pengurus GARY untuk menambahkan file komunitas.</p>
         </header>
-        {!authorized ? (
+        {/* {!authorized ? (
           <form className="access-form upload-form" onSubmit={verifyAccess}>
             <h2>Kode akses pengurus</h2>
             <input type="password" value={accessCode} onChange={(event) => setAccessCode(event.target.value)} placeholder="Kode akses" required />
             <button className="green-button" type="submit">Verifikasi akses</button>
           </form>
-        ) : (
+        ) : ( */}
           <form className="upload-form" onSubmit={uploadFile}>
             <h2>Upload {label}</h2>
             <p>Format PDF, PPT, atau PPTX. Maksimal 20 MB.</p>
@@ -107,7 +107,7 @@ export default function UploadPage() {
               <button className="green-button" type="submit" disabled={uploading}>{uploading ? "Mengunggah..." : "Upload file"}</button>
             </div>
           </form>
-        )}
+        
         {error && <div className="error-notice">{error}</div>}
         {message && <div className="notice">{message}</div>}
         <Link className="text-button" to={kind === "material" ? "/materi" : "/dokumentasi"}>← Kembali ke {label}</Link>
