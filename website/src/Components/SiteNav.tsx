@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import logo from "../Assets/Images/gary_logo.png";
+import logo from "../../Assets/Images/gary_logo.png";
 
 export default function SiteNav() {
   return (

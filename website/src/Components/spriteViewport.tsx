@@ -1,5 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import { cut } from "../lib/cut";
+import player from "../../Assets/sprites/player.png";
 
 type K = "idle" | "walk" | "attack";
 type R = { x: number; y: number; w: number; h: number };
@@ -34,7 +35,7 @@ const parse = (s: string, n: number) => {
 const all = (n: number) => { const s = n > 1 ? `0-${n - 1}` : "0"; return { idle: s, walk: s, attack: s }; };
 const autoScale = (f: R[]) => Math.max(1, Math.min(8, Math.round(110 / Math.max(1, ...f.map((r) => r.h)))));
 const DEFAULT: Cfg = {
-  name: "player.png", orig: "/Assets/sprites/player.png", src: "/Assets/sprites/player.png", w: 50, h: 50,
+  name: "player.png", orig: player, src: player, w: 50, h: 50,
   frames: gridFrames(50, 50, 17, 17), seq: { idle: "0-1", walk: "2-6", attack: "7-8" }, fps: { idle: 8, walk: 8, attack: 8 }, scale: 5, feet: false, p: P0,
 };
 
