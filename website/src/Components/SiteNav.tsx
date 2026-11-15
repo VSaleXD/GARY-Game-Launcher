@@ -11,7 +11,7 @@ export default function SiteNav() {
       <div className="nav-links">
         <Link className="nav-link" to="/game-hub">Game Hub</Link>
         <Link className="nav-link" to="/materi">Materi</Link>
-        <Link className="nav-link" to="/dokumentasi">Dokumentasi</Link>
+        {/* <Link className="nav-link" to="/dokumentasi">Dokumentasi</Link> */}
       </div>
     </nav>
   );

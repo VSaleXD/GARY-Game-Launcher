@@ -1,2 +1,9 @@
 obj/
 bin/
+*.csproj
+*.user
+*.sln
+*.suo
+*.vscode
+
+_ref

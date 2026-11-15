@@ -1,7 +1,6 @@
 import { useEffect, useRef, useState } from "react";
 import type { MutableRefObject } from "react";
 import p5 from "p5";
-import { cut } from "../lib/cut";
 
 type RGB = [number, number, number];
 type Ctrl = { dir: (d: number) => void; key: (k: string) => void; run: (r: boolean) => void };
@@ -43,8 +42,11 @@ function createSketch(ctrl: MutableRefObject<Ctrl>) {
       spawnPellet();
     };
     const spawnGhost = (boss: boolean) => {
+      let x = 0, y = 0;
+      do { x = Math.floor(p.random(COLS)); y = Math.floor(p.random(ROWS)); }
+      while (Math.abs(x - pac.x) + Math.abs(y - pac.y) < 6); // minimal 6 petak dari Pac-Man
       ghosts.push({
-        x: Math.floor(p.random(COLS)), y: Math.floor(p.random(ROWS)),
+        x, y,
         col: boss ? [255, 50, 50] : COLORS[ghostCount % COLORS.length], boss,
       });
       if (!boss) ghostCount++;
@@ -58,10 +60,19 @@ function createSketch(ctrl: MutableRefObject<Ctrl>) {
       }
     };
 
+    const checkHits = () => {
+      for (let k = ghosts.length - 1; k >= 0; k--) {
+        const g = ghosts[k];
+        if (g.x === pac.x && g.y === pac.y) {
+          if (powered) { score += g.boss ? 500 : 200; ghosts.splice(k, 1); } else gameOver = true;
+        }
+      }
+    };
+
     // ---- kontrol dari React ----
     ctrl.current = {
       dir: (d) => (gameOver ? reset() : (pac.dir = d)),
-      key: (k) => { if (gameOver) reset(); else if (k in KEYDIR) pac.dir = KEYDIR[k]; },
+      key: (k) => { if (gameOver) { if (k === "Enter" || k === " " || k in KEYDIR) reset(); } else if (k in KEYDIR) pac.dir = KEYDIR[k]; },
       run: (r) => (running = r),
     };
 
@@ -133,6 +144,7 @@ function createSketch(ctrl: MutableRefObject<Ctrl>) {
     };
 
     p.setup = () => {
+      p.pixelDensity(1);
       const c = p.createCanvas(GAME_W + UW + 20, GAME_H);
       c.style("width", "100%"); c.style("height", "auto"); c.style("display", "block");
       p.textFont(FONT); reset();
@@ -158,13 +170,8 @@ function createSketch(ctrl: MutableRefObject<Ctrl>) {
           if (dots[i]) { dots[i] = false; score += 10; }
           const pel = pellets.find((q) => q.x === pac.x && q.y === pac.y && !q.eaten);
           if (pel) { pel.eaten = true; powered = true; poweredTimer = 0; score += 50; }
-          moveGhosts();
-          for (let k = ghosts.length - 1; k >= 0; k--) {
-            const g = ghosts[k];
-            if (g.x === pac.x && g.y === pac.y) {
-              if (powered) { score += g.boss ? 500 : 200; ghosts.splice(k, 1); } else gameOver = true;
-            }
-          }
+          checkHits();
+          if (!gameOver) { moveGhosts(); checkHits(); }
         }
       }
       p.fill(255, 255, 200); p.noStroke();
@@ -185,19 +192,22 @@ export default function PacmanGame() {
   const [playing, setPlaying] = useState(false);
 
   useEffect(() => {
+    host.current!.replaceChildren();
     const inst = new p5(createSketch(ctrl), host.current!);
-    return () => {
-      inst.remove();
-    };
+    return () => inst.remove();
   }, []);
+  useEffect(() => { ctrl.current.run(playing); }, [playing]);
+  // jeda otomatis saat game keluar dari layar
   useEffect(() => {
-    ctrl.current.run(playing);
-  }, [playing]);
+    const io = new IntersectionObserver(([en]) => { if (!en.isIntersecting) setPlaying(false); }, { threshold: 0.3 });
+    io.observe(frame.current!);
+    return () => io.disconnect();
+  }, []);
 
   const onKeyDown = (e: React.KeyboardEvent) => {
     if (!playing) return;
     if (e.key === "Escape") return setPlaying(false);
-    if (e.key in KEYDIR || e.key === " ") e.preventDefault(); // cegah halaman ikut scroll
+    if (e.key in KEYDIR || e.key === " " || e.key === "Enter") e.preventDefault(); // cegah halaman ikut scroll
     ctrl.current.key(e.key);
   };
   const pad = (label: string, d: number, cls: string) => (
@@ -208,21 +218,17 @@ export default function PacmanGame() {
   );
 
   return (
-<section id="game-hub" className="bg-[#0A0D0A] px-6 py-20 text-[#e8f5d8]">
+    <section id="game-hub" className="bg-[#0A0D0A] px-6 py-20 text-[#e8f5d8]">
       <div className="mx-auto max-w-6xl">
-        <p className="font-mono text-xs text-lime-400">&gt; GAME HUB</p>
-        <h2 className="mb-6 font-['Bebas_Neue'] text-[clamp(48px,8vw,104px)] leading-[.9]">
-          Mainkan. <span className="text-lime-400">Langsung.</span>
-        </h2>
         <div ref={frame} tabIndex={0} onKeyDown={onKeyDown}
           onBlur={(e) => { if (!e.currentTarget.contains(e.relatedTarget as Node)) setPlaying(false); }}
-          style={cut(16)} className="bg-[#101510] shadow-[0_0_0_1px_rgba(163,230,53,.2)] outline-none">
+          className="border border-lime-400/25 bg-[#101510] outline-none">
           <div className="flex justify-between border-b border-lime-400/15 bg-[#0d120d] px-3 py-2 font-mono text-[11px] text-[#9db88a]">
             <span><b className="text-lime-400">▣</b> Game · PacMan.ts</span>
             <span>{playing ? "● RUNNING — Esc untuk jeda" : "○ PAUSED"}</span>
           </div>
           <div className="relative">
-            <div ref={host} className="leading-[0]" />
+            <div ref={host} className="leading-[0]" style={{ transform: "translateZ(0)" }} />
             {!playing && (
               <button type="button" onClick={() => { setPlaying(true); frame.current?.focus(); }}
                 className="absolute inset-0 grid place-items-center bg-black/70 font-['Bebas_Neue'] text-[clamp(32px,6vw,72px)] tracking-wide text-lime-400 hover:bg-black/55">

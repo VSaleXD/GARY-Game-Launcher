@@ -1,13 +1,19 @@
-import { useState } from "react";
+import { BrowserRouter, Route, Routes } from "react-router-dom";
 import LandingPage from "./Pages/landingPage";
 import GaryGameHub from "./Pages/garyGameHub";
+import ResourcePage from "./Pages/ResourcePage";
+import UploadPage from "./Pages/uploadPage";
 
-function App() {
-  const [page, setPage] = useState<"landing" | "hub">("landing");
-
-  return page === "landing"
-    ? <LandingPage onOpenHub={() => setPage("hub")} />
-    : <GaryGameHub onBack={() => setPage("landing")} />;
+export default function App() {
+  return (
+    <BrowserRouter>
+      <Routes>
+        <Route path="/" element={<LandingPage />} />
+        <Route path="/game-hub" element={<GaryGameHub />} />
+        <Route path="/materi" element={<ResourcePage kind="material" title="Materi GARY" intro="Belajar game development bersama komunitas GARY." />} />
+        <Route path="/dokumentasi" element={<ResourcePage kind="documentation" title="Dokumentasi GARY" intro="Panduan dan catatan teknis untuk membuat game bersama." />} />
+        <Route path="/upload" element={<UploadPage />} />
+      </Routes>
+    </BrowserRouter>
+  );
 }
-
-export default App;
