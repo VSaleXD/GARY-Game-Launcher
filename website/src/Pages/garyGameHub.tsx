@@ -49,7 +49,7 @@ export default function GaryGameHub() {
     <div className="hub-page">
       <SiteNav />
       <main className="hub-wrap">
-        <header className="hub-header"><p className="eyebrow">GARY COMMUNITY / IPB</p><h1><span>GARY</span> GAME HUB</h1><p >Learn  •  Develop  •  Fun</p></header>
+        <header className="hub-header"><p className="eyebrow">GARY COMMUNITY / IPB University</p><h1><span>GARY</span> GAME HUB</h1><p >Learn  •  Develop  •  Fun</p></header>
         {!hasSupabaseConfig && <div className="notice">Mode prototype aktif. Jalankan SQL di <code>supabase/schema.sql</code> dan isi <code>.env.local</code> untuk memakai database.</div>}
         {error && <div className="error-notice">{error}</div>}
         <section className="hub-toolbar">

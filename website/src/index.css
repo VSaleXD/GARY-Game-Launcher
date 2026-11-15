@@ -123,13 +123,13 @@ footer { width: min(1200px, calc(100% - 48px)); margin: auto; padding: 20px 0; b
 .game-filters select { border: 1px solid #475340; border-radius: 5px; padding: 0 10px; color: #fff; background: #0a110c; }
 .empty-state { padding: 50px 0; color: var(--muted); text-align: center; }
 .hub-links { display: flex; justify-content: center; gap: 30px; margin-top: 40px; }
-.resource-wrap { width: min(1000px, calc(100% - 48px)); margin: auto; padding: 55px 0 80px; }
+.resource-wrap { width: min(1200px, calc(100% - 48px)); margin: 0 auto; padding: 55px 0 80px; }
 .resource-header { text-align: center; margin-bottom: 35px; }
 .resource-header h1 { font: 800 clamp(2.4rem, 5vw, 4rem) "Oxanium"; margin: 0; color: var(--green); }
 .resource-header > p:last-child { color: var(--muted); margin: 10px 0 0; }
 .resource-toolbar { justify-content: space-between; margin-bottom: 22px; }
 .resource-toolbar .green-button { text-decoration: none; }
-.resource-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 16px; }
+.resource-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 16px; }
 .resource-card { padding: 25px; border: 1px solid #384b16; border-radius: 8px; background: var(--card); }
 .resource-category { color: var(--green); font: 700 .7rem "Rajdhani"; letter-spacing: 1px; text-transform: uppercase; }
 .resource-card h2 { font: 700 1.3rem "Oxanium"; margin: 22px 0 8px; }
@@ -154,6 +154,7 @@ footer { width: min(1200px, calc(100% - 48px)); margin: auto; padding: 20px 0; b
 .upload-fields button { justify-self: start; }
 .upload-fields button:disabled { opacity: .5; cursor: wait; }
 @media (max-width: 560px) { .game-filters, .resource-toolbar { width: 100%; flex-direction: column; } .game-filters input, .resource-toolbar input { width: 100%; min-height: 42px; } .game-filters select { min-height: 42px; } .resource-grid { grid-template-columns: 1fr; } .hub-links { flex-direction: column; align-items: center; gap: 12px; } }
+@media (max-width: 560px) { .resource-wrap { width: calc(100% - 32px); } }
 @media (max-width: 560px) { .upload-fields { grid-template-columns: 1fr; } .upload-fields input[type="file"] { grid-column: auto; } .upload-fields button { width: 100%; } }
 @media (max-width: 560px) { .pdf-viewer-heading { align-items: flex-start; flex-direction: column; gap: 12px; } .pdf-viewer-section { padding: 14px; } .pdf-viewer-section iframe { height: 520px; } }
 

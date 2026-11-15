@@ -2,7 +2,6 @@ import { Link } from "react-router-dom";
 import SiteNav from "../Components/SiteNav";
 import TeamSection from "../Components/teamSection";
 import SpriteViewport from "../Components/spriteViewport";
-import "../Style/gary.css";
 
 export default function LandingPage() {
   return (

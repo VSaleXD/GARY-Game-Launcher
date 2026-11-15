@@ -57,7 +57,11 @@ export default function UploadPage() {
     const { error: storageError } = await supabase.storage.from("resources").upload(path, file, { contentType: file.type });
     if (storageError) {
       setUploading(false);
-      setError(`Upload gagal: ${storageError.message}`);
+      setError(
+        storageError.message.toLowerCase().includes("bucket not found")
+          ? "Bucket Supabase 'resources' belum dibuat. Jalankan SQL setup Storage di supabase/schema.sql."
+          : `Upload gagal: ${storageError.message}`,
+      );
       return;
     }
     const { data: publicFile } = supabase.storage.from("resources").getPublicUrl(path);
@@ -89,7 +93,6 @@ export default function UploadPage() {
         {!authorized ? (
           <form className="access-form upload-form" onSubmit={verifyAccess}>
             <h2>Kode akses pengurus</h2>
-            <p>Masukkan kode akses yang diberikan oleh pengurus GARY.</p>
             <input type="password" value={accessCode} onChange={(event) => setAccessCode(event.target.value)} placeholder="Kode akses" required />
             <button className="green-button" type="submit">Verifikasi akses</button>
           </form>
