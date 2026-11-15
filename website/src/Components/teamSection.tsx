@@ -1,8 +1,9 @@
 import { useState } from "react";
 import { cut } from "../lib/cut";
+import member from "../../Assets/AnggotaGary/AllMember-trim.webp";
 
 // Taruh AllMember-trim.webp di public/Assets/AnggotaGary/ (foto sudah dipotong rapat & diperkecil)
-const IMG = "/Assets/AnggotaGary/AllMember-trim.webp";
+const IMG = member;
 const F = "font-['Oxanium',sans-serif]";
 
 // x & w = area hover (% lebar foto) · cx = posisi name plate (% lebar foto)

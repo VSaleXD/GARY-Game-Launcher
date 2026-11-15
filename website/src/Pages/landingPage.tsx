@@ -22,10 +22,7 @@ export default function LandingPage() {
         </section>
 
       </main>
-      <div className="about-section" id="about">
-        <h2>Tentang GARY</h2>
-        <p>GARY adalah komunitas pengembang game di IPB University. Kami mengadakan game jam, workshop, dan proyek kolaboratif untuk belajar dan bersenang-senang bersama.</p>
-        <p>Komunitas ini terbuka untuk semua mahasiswa IPB yang tertarik dengan pengembangan game, baik pemula maupun yang sudah berpengalaman. Bergabunglah dengan kami untuk belajar, mengembangkan keterampilan, dan menciptakan game yang menyenangkan!</p>
+      <div id="about">
         <TeamSection /> 
       </div>
       
