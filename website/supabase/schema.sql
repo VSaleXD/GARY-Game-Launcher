@@ -24,9 +24,11 @@ create table if not exists public.resources (
 alter table public.games enable row level security;
 alter table public.resources enable row level security;
 drop policy if exists "Public can read games" on public.games;
+drop policy if exists "Anyone can create games" on public.games;
 drop policy if exists "Public can read resources" on public.resources;
 drop policy if exists "Anyone can create resources" on public.resources;
 create policy "Public can read games" on public.games for select using (true);
+create policy "Anyone can create games" on public.games for insert with check (true);
 create policy "Public can read resources" on public.resources for select using (true);
 create policy "Anyone can create resources" on public.resources for insert with check (true);
 

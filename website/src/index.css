@@ -149,13 +149,15 @@ footer { width: min(1200px, calc(100% - 48px)); margin: auto; padding: 20px 0; b
 .upload-form p { color: var(--muted); font-size: .8rem; margin: 0 0 17px; }
 .upload-fields { display: grid; grid-template-columns: 1fr 1fr; gap: 10px; }
 .upload-fields input { min-width: 0; border: 1px solid #475340; border-radius: 5px; padding: 11px 12px; color: #fff; background: #0a110c; }
+.upload-fields textarea { grid-column: span 2; min-height: 90px; resize: vertical; border: 1px solid #475340; border-radius: 5px; padding: 11px 12px; color: #fff; background: #0a110c; font: inherit; }
 .upload-fields input[type="file"] { grid-column: span 2; }
-.upload-fields input:focus { border-color: var(--green); outline: none; }
+.upload-fields input:focus, .upload-fields textarea:focus { border-color: var(--green); outline: none; }
 .upload-fields button { justify-self: start; }
 .upload-fields button:disabled { opacity: .5; cursor: wait; }
 @media (max-width: 560px) { .game-filters, .resource-toolbar { width: 100%; flex-direction: column; } .game-filters input, .resource-toolbar input { width: 100%; min-height: 42px; } .game-filters select { min-height: 42px; } .resource-grid { grid-template-columns: 1fr; } .hub-links { flex-direction: column; align-items: center; gap: 12px; } }
 @media (max-width: 560px) { .resource-wrap { width: calc(100% - 32px); } }
 @media (max-width: 560px) { .upload-fields { grid-template-columns: 1fr; } .upload-fields input[type="file"] { grid-column: auto; } .upload-fields button { width: 100%; } }
+@media (max-width: 560px) { .upload-fields textarea { grid-column: auto; } }
 @media (max-width: 560px) { .pdf-viewer-heading { align-items: flex-start; flex-direction: column; gap: 12px; } .pdf-viewer-section { padding: 14px; } .pdf-viewer-section iframe { height: 520px; } }
 
 .pacman-section { padding: 90px 24px 100px; color: #e8f5d8; background: #0a0d0a; }

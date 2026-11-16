@@ -2,6 +2,7 @@ import { Link } from "react-router-dom";
 import SiteNav from "../Components/SiteNav";
 import TeamSection from "../Components/teamSection";
 import SpriteViewport from "../Components/spriteViewport";
+import Galleri from "../Components/meeting"
 
 export default function LandingPage() {
   return (
@@ -25,8 +26,10 @@ export default function LandingPage() {
       <div id="about">
         <TeamSection /> 
       </div>
-      
-
+      <div id="galeri">
+        <Galleri />
+        </div>
+    
 
       <footer><span>GARY COMMUNITY — IPB</span><span>LEARN • DEVELOP • FUN</span></footer>
     </div>

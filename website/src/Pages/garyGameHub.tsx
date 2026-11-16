@@ -1,9 +1,9 @@
 import { useEffect, useMemo, useState, type CSSProperties } from "react";
-import { Link } from "react-router-dom";
 import SiteNav from "../Components/SiteNav";
 import { seedGames } from "../data/seed";
 import { hasSupabaseConfig, supabase } from "../lib/supabase";
 import type { Game } from "../types/content";
+
 
 const GAMES_PER_PAGE = 8;
 

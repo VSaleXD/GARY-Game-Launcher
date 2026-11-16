@@ -8,29 +8,30 @@ const ACCESS_CODE = import.meta.env.VITE_GARY_UPLOAD_CODE as string | undefined;
 
 export default function UploadPage() {
   const [params] = useSearchParams();
-  const kind: Resource["kind"] = params.get("kind") === "documentation" ? "documentation" : "material";
-  const label = kind === "material" ? "Materi" : "Dokumentasi";
+  const uploadKind = params.get("kind") === "game" ? "game" : params.get("kind") === "documentation" ? "documentation" : "material";
+  const kind: Resource["kind"] = uploadKind === "documentation" ? "documentation" : "material";
+  const label = uploadKind === "game" ? "Game" : kind === "material" ? "Materi" : "Dokumentasi";
   const [accessCode, setAccessCode] = useState("");
   const [authorized, setAuthorized] = useState(false);
   const [error, setError] = useState("");
   const [message, setMessage] = useState("");
   const [uploading, setUploading] = useState(false);
 
-  // function verifyAccess(event: FormEvent<HTMLFormElement>) {
-  //   event.preventDefault();
-  //   setError("");
-  //   if (!ACCESS_CODE) {
-  //     setError("Kode akses belum dikonfigurasi. Isi VITE_GARY_UPLOAD_CODE di Website/.env.local.");
-  //     return;
-  //   }
-  //   if (accessCode !== ACCESS_CODE) {
-  //     setError("Kode akses tidak valid.");
-  //     return;
-  //   }
-  //   setAuthorized(true);
-  // }
+  function verifyAccess(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    if (!ACCESS_CODE) {
+      setError("Kode akses belum dikonfigurasi. Isi VITE_GARY_UPLOAD_CODE di Website/.env.local.");
+      return;
+    }
+    if (accessCode !== ACCESS_CODE) {
+      setError("Kode akses tidak valid.");
+      return;
+    }
+    setAuthorized(true);
+  }
 
-  async function uploadFile(event: FormEvent<HTMLFormElement>) {
+  async function uploadResource(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
     setError("");
     setMessage("");
@@ -81,6 +82,66 @@ export default function UploadPage() {
     event.currentTarget.reset();
   }
 
+  async function uploadGame(event: FormEvent<HTMLFormElement>) {
+    event.preventDefault();
+    setError("");
+    setMessage("");
+    if (!supabase) {
+      setError("Supabase belum terhubung. Periksa konfigurasi .env.local.");
+      return;
+    }
+
+    const data = new FormData(event.currentTarget);
+    const title = String(data.get("title") ?? "").trim();
+    const genre = String(data.get("genre") ?? "").trim().toUpperCase();
+    const description = String(data.get("description") ?? "").trim();
+    const gameUrl = String(data.get("game_url") ?? "").trim();
+    const image = data.get("image");
+    if (!title || !genre || !description || !gameUrl || !(image instanceof File) || image.size === 0) {
+      setError("Judul, genre, deskripsi, URL game, dan thumbnail wajib diisi.");
+      return;
+    }
+    if (!/^https?:\/\//i.test(gameUrl)) {
+      setError("URL game harus diawali http:// atau https://.");
+      return;
+    }
+    if (!image.type.startsWith("image/") || image.size > 5 * 1024 * 1024) {
+      setError("Thumbnail harus berupa gambar dan maksimal 5 MB.");
+      return;
+    }
+
+    setUploading(true);
+    const safeName = image.name.replace(/[^a-zA-Z0-9._-]/g, "-");
+    const path = `games/${crypto.randomUUID()}-${safeName}`;
+    const { error: storageError } = await supabase.storage.from("resources").upload(path, image, { contentType: image.type });
+    if (storageError) {
+      setUploading(false);
+      setError(
+        storageError.message.toLowerCase().includes("bucket not found")
+          ? "Bucket Supabase 'resources' belum dibuat. Jalankan SQL setup Storage di supabase/schema.sql."
+          : `Upload thumbnail gagal: ${storageError.message}`,
+      );
+      return;
+    }
+
+    const { data: publicFile } = supabase.storage.from("resources").getPublicUrl(path);
+    const { error: recordError } = await supabase.from("games").insert({
+      title,
+      genre,
+      description,
+      color: "#3a4700",
+      image_url: publicFile.publicUrl,
+      game_url: gameUrl,
+    });
+    setUploading(false);
+    if (recordError) {
+      setError(`Thumbnail terunggah, tetapi data game gagal disimpan: ${recordError.message}`);
+      return;
+    }
+    setMessage("Game berhasil ditambahkan ke GARY Game Hub.");
+    event.currentTarget.reset();
+  }
+
   return (
     <div className="hub-page">
       <SiteNav />
@@ -90,27 +151,43 @@ export default function UploadPage() {
           <h1>Upload {label}</h1>
           <p>Halaman khusus pengurus GARY untuk menambahkan file komunitas.</p>
         </header>
-        {/* {!authorized ? (
+        {!authorized ? (
           <form className="access-form upload-form" onSubmit={verifyAccess}>
             <h2>Kode akses pengurus</h2>
             <input type="password" value={accessCode} onChange={(event) => setAccessCode(event.target.value)} placeholder="Kode akses" required />
             <button className="green-button" type="submit">Verifikasi akses</button>
           </form>
-        ) : ( */}
-          <form className="upload-form" onSubmit={uploadFile}>
+        ) : (
+          <form className="upload-form" onSubmit={uploadKind === "game" ? uploadGame : uploadResource}>
             <h2>Upload {label}</h2>
-            <p>Format PDF, PPT, atau PPTX. Maksimal 20 MB.</p>
-            <div className="upload-fields">
-              <input name="title" placeholder="Judul file" required />
-              <input name="category" placeholder="Kategori, contoh: Godot" required />
-              <input name="file" type="file" accept=".pdf,.ppt,.pptx,application/pdf" required />
-              <button className="green-button" type="submit" disabled={uploading}>{uploading ? "Mengunggah..." : "Upload file"}</button>
-            </div>
+            {uploadKind === "game" ? (
+              <>
+                <p>Tambahkan game yang sudah online, misalnya di itch.io, beserta thumbnail-nya.</p>
+                <div className="upload-fields">
+                  <input name="title" placeholder="Judul game" required />
+                  <input name="genre" placeholder="Genre, contoh: ACTION" required />
+                  <textarea name="description" placeholder="Deskripsi singkat game" required />
+                  <input name="game_url" type="url" placeholder="https://..." required />
+                  <input name="image" type="file" accept="image/*" required />
+                  <button className="green-button" type="submit" disabled={uploading}>{uploading ? "Mengunggah..." : "Upload game"}</button>
+                </div>
+              </>
+            ) : (
+              <>
+                <p>Format PDF, PPT, atau PPTX. Maksimal 20 MB.</p>
+                <div className="upload-fields">
+                  <input name="title" placeholder="Judul file" required />
+                  <input name="category" placeholder="Kategori, contoh: Godot" required />
+                  <input name="file" type="file" accept=".pdf,.ppt,.pptx,application/pdf" required />
+                  <button className="green-button" type="submit" disabled={uploading}>{uploading ? "Mengunggah..." : "Upload file"}</button>
+                </div>
+              </>
+            )}
           </form>
-        
+        )}
         {error && <div className="error-notice">{error}</div>}
         {message && <div className="notice">{message}</div>}
-        <Link className="text-button" to={kind === "material" ? "/materi" : "/dokumentasi"}>← Kembali ke {label}</Link>
+        <Link className="text-button" to={uploadKind === "game" ? "/game-hub" : kind === "material" ? "/materi" : "/dokumentasi"}>← Kembali ke {label}</Link>
       </main>
     </div>
   );
