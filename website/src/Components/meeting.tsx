@@ -4,7 +4,7 @@ import Gary1 from "../../Assets/Galleri/Gary1.jpeg";
 import Gary2 from "../../Assets/Galleri/Gary2.jpeg";
 import Gary3 from "../../Assets/Galleri/Gary3.jpeg";
 import Gary4 from "../../Assets/Galleri/Gary4.jpeg";
-import Agsn from "../../Assets/Galleri/AGSN.jpg";
+import Agsn from "../../Assets/Galleri/AGSN.webp";
 import WeeklyMeet from "../../Assets/Galleri/WeeklyMeet.jpg";
 
 const F = "font-['Oxanium',sans-serif]";
