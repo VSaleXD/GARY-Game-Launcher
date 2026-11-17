@@ -26,6 +26,7 @@ export default function LandingPage() {
       <div id="about">
         <TeamSection /> 
       </div>
+      <Galleri />
       <footer><span>GARY COMMUNITY — IPB</span><span>LEARN • DEVELOP • FUN</span></footer>
     </div>
   );

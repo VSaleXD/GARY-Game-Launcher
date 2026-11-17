@@ -135,7 +135,11 @@ export default function UploadPage() {
     });
     setUploading(false);
     if (recordError) {
-      setError(`Thumbnail terunggah, tetapi data game gagal disimpan: ${recordError.message}`);
+      setError(
+        recordError.message.toLowerCase().includes("row-level security")
+          ? "Thumbnail terunggah, tetapi policy insert tabel games belum aktif. Jalankan SQL policy games di Website/supabase/schema.sql."
+          : `Thumbnail terunggah, tetapi data game gagal disimpan: ${recordError.message}`,
+      );
       return;
     }
     setMessage("Game berhasil ditambahkan ke GARY Game Hub.");
