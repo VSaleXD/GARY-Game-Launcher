@@ -3,6 +3,7 @@ import LandingPage from "./Pages/landingPage";
 import GaryGameHub from "./Pages/garyGameHub";
 import ResourcePage from "./Pages/ResourcePage";
 import UploadPage from "./Pages/uploadPage";
+import AdminPage from "./Pages/AdminPage";
 
 export default function App() {
   return (
@@ -13,6 +14,7 @@ export default function App() {
         <Route path="/materi" element={<ResourcePage kind="material" title="Materi GARY" intro="Belajar game development bersama komunitas GARY." />} />
         <Route path="/dokumentasi" element={<ResourcePage kind="documentation" title="Dokumentasi GARY" intro="Panduan dan catatan teknis untuk membuat game bersama." />} />
         <Route path="/upload" element={<UploadPage />} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
     </BrowserRouter>
   );
